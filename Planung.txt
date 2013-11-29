@@ -1,0 +1,120 @@
+##{CMSNAME}##	29. November 2013 12:49			
+				
+Git: https://github.com/RTK/Dobslaf.git       
+        
+Phase 1: Planung
+..............................................
+
+Mitwirkende:
+        Kruse, Rouven
+				Offerhaus, Lukas
+				Schnalke, Jan-Niklas
+				Schürmann, Jonas
+				
+Beschreibung:	
+        Das alphaCMS ist ein simples, funktionales und stabiles Content Management System mit intuitiever Bedienung.
+
+Eingesetzte Technologien:
+        - (X)HTML (5)
+				- CSS (3)
+				- JavaScript (jQuery)
+				- PHP (5)
+				- SQL (mySQL)
+
+        ggfs.
+        - Templatesystem (eigenes, alternativ: Smarty, Twig)
+
+Sektionen:
+      - Frontend (HTML, CSS, JS)
+			- Backend (PHP, SQL)
+
+Strukturierung:
+      -MVC Konzept (Model View Controller)
+			
+Grundklassen:
+      - Model (Datenbank -> SQL)
+			- View (Templates -> Design, Funktionalität)
+			- Controller (Basis -> Schnittstelle zwischen Model und View)
+			
+----------------------------------------------
+
+Phase 2: Beratung - Konventionen
+..............................................
+
+Klassen - Namespace:
+      - \ITC\{CMSNAME}\[Klasse]	
+
+Syntax:
+      - [modifizierer] function funktionsname()
+		    {
+			   	machwas();
+			  }
+			 
+		  - class Name [extends Oberklasse]
+			  {
+				  private $variable;
+					
+				  public __construct($parameter1 = null, $parameter2 = null )
+				  {
+				  	$this->variable = $parameter1;
+			 	  }
+          
+          public wichtigeFunktion()
+          {
+            machWasTolles();
+          }
+          
+          private interneFunktion()
+          {
+            machnix();
+          }
+			  }
+
+Variablenmodifizierer in Klassen:
+      - private
+
+Datei (-) - und Ordnerstruktur (+):
+     	+ core
+			 + model
+			   + entities
+				 + collections
+			 	   - testmodel.php [Klasse Testmodel, extends Model]
+			 + view
+					- testview.php [Klasse Testview, extends View]
+			 + controller
+					- testview.php [Klasse Testcontroller, extends Controller]
+			 + init
+					- init.php
+					- config.php
+			 + mvc
+			   - controller.php [Klasse Controller]
+			 	 - model.php [Klasse Model]
+				 - view.php [Klasse View]
+			+ out
+		   + frontend
+  		   + templates
+    		   - index.tpl
+    			 + css
+    			 + js
+  				 + img
+			 + backend
+			  + css
+			  + js
+			  + img
+      index.php
+      .htaccess
+			   
+----------------------------------------------
+
+Phase 3: Allgemeine Besprechungen
+..............................................
+
+Datenbankkonzept:
+  -Tabellen
+	   -Spalten (Namen, Datentypen, ...)
+	-Relationen
+			
+Aufteilung:
+  - Model
+	- View
+	- Controller
