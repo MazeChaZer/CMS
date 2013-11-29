@@ -1,6 +1,6 @@
 ##{CMSNAME}##	29. November 2013 12:49			
 				
-Git: https://github.com/RTK/Dobslaf.git       
+https://github.com/RTK/CMS.git   
         
 Phase 1: Planung
 ..............................................
