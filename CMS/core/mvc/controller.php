@@ -3,8 +3,8 @@
 /* 
  * class.Controller
  * created: 02/11/2013
- * last modify: 02/11/2013
- * author:
+ * last edit: 02/11/2013
+ * author: DD
  */
 
 class Controller
