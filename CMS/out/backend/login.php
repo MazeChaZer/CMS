@@ -4,7 +4,7 @@
         <title>Admin Control Panel</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" media="handheld, projection, screen, tv" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,900italic,900,700italic,700,500italic|Raleway:400,200" />
-        <link rel="stylesheet" href="source/sys/res/plugins/fontawesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="out/backend/fontawesome/font-awesome.min.css" />
         <link rel="stylesheet" href="out/backend/css/main.css" />
         <link rel="stylesheet" href="out/backend/css/login.css" />
     </head>
