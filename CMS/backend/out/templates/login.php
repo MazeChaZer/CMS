@@ -1,12 +1,12 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="de">
     <head>
         <title>Admin Control Panel</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" media="handheld, projection, screen, tv" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,900italic,900,700italic,700,500italic|Raleway:400,200" />
-        <link rel="stylesheet" href="out/backend/fontawesome/font-awesome.min.css" />
-        <link rel="stylesheet" href="out/backend/css/main.css" />
-        <link rel="stylesheet" href="out/backend/css/login.css" />
+        <link rel="stylesheet" href="out/fontawesome/font-awesome.min.css" />
+        <link rel="stylesheet" href="out/css/main.css" />
+        <link rel="stylesheet" href="out/css/login.css" />
     </head>
     <body>
         <div class="cms-login">
@@ -56,8 +56,8 @@
                 <span>&copy; 2013 Menschen</span>
         </footer>
         
-        <script src="out/backend/js/objects.js"></script>
-        <script src="out/backend/js/login.js"></script>
+        <script src="out/js/objects.js"></script>
+        <script src="out/js/login.js"></script>
         <script src="source/sys/res/js/default.js"></script>
     </body>
 </html>

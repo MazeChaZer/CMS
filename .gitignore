@@ -213,3 +213,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#############
+## Projektspezifische Dateien
+#############
+
+CMS/backend/core/init/settings.php
