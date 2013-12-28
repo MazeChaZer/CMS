@@ -17,22 +17,22 @@
                 </hgroup>
                 <footer>
                     <nav>
-                        <a href="http://Seite.de" tooltip tooltip-text="Zurück zur Homepage" tooltip-direction="left">
+                        <a href="<?= URL; ?>" tooltip tooltip-text="Zurück zur Homepage" tooltip-direction="left">
                             <span class="fa fa-home"></span>
                         </a>
                     </nav>
                 </footer>
             </header>
                 <section role="main">
-                    <form action="<?php echo BACKENDURL; ?>index.php?page=login" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
+                    <form action="<?= BACKENDURL; ?>index.php?page=login" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
                         <section>
                             <p>
                                 <label for="cms-logindata[username]">Benutzername&nbsp;</label>
-                                <input tabindex="1" type="text" name="cms-logindata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{literal}{1,}{/literal}[a-zA-Z0-9-._]{literal}{5,31}{/literal}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." autofocus />
+                                <input tabindex="1" type="text" name="cms-logindata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{1,}[a-zA-Z0-9-._]{5,31}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." autofocus />
                             </p>
                             <p>
                                 <label for="cms-logindata[password]">Passwort&nbsp;</label>
-                                <input tabindex="2" type="password" name="cms-logindata#password" placeholder="*********" maxlength="32" required pattern="^[a-zA-Z0-9._*!?#+:,;-_]{literal}{6,32}{/literal}" tooltip tooltip-direction="bottom" tooltip-text="Das Passwort muss aus mindestens 6 Zeichen bestehen." />
+                                <input tabindex="2" type="password" name="cms-logindata#password" placeholder="*********" maxlength="32" required pattern="^[a-zA-Z0-9._*!?#+:,;-_]{6,32}" tooltip tooltip-direction="bottom" tooltip-text="Das Passwort muss aus mindestens 6 Zeichen bestehen." />
                             </p>
                             <p class="cms-table-cell">
                                 <label for="cms-logindata[keepsession]">Sitzung speichern?&nbsp;</label>
@@ -55,7 +55,6 @@
         <footer>
                 <span>&copy; 2013 Menschen</span>
         </footer>
-        
         <script src="out/js/objects.js"></script>
         <script src="out/js/login.js"></script>
         <script src="out/js/default.js"></script>

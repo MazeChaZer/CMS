@@ -14,30 +14,3 @@ var validateForm = new FormValidator ( document.querySelector ( 'form' ), {
 
     }
 }   );
-
-var formLayer, loginForm = new AjaxForm ( document.querySelector ( 'form' ), {
-    init: function ( ) {
-
-        formLayer = new Layer ( {
-            parent: document.body,
-            type: 0
-        }   );
-        
-    },
-    submit: function ( ) {
-       
-        formLayer.show.apply ( formLayer );
-        
-    },
-    success: function ( e, r ) {
-        
-        formLayer.hide.apply ( formLayer );
-        document.write ( e );
-        
-    },
-    error: function ( e ) {
-    
-        formLayer.hide.apply ( formLayer );
-        
-    }
-}   );
