@@ -63,6 +63,54 @@ class User extends Entity {
         return $result['maxID'] + 1;
     }
     
+    public function loadByEmail($email)
+    {
+            $st = self::$db->prepare(
+               "SELECT * FROM user
+                   WHERE email = :email"
+            );
+            $st->execute(array(
+               ':email' => $email)
+            );
+            $result = $st->fetch(PDO::FETCH_ASSOC);
+            if(isSet($result))
+            {
+                $this->username = $result['username'];
+                $this->password = $result['password'];
+                $this->email = $result['email'];
+                $this->userID = $result['userID'];
+                return 0;   // User successfully loaded!
+            }
+            else
+            {
+                return 1; // User not found!
+            }
+    }
+    
+    public function loadByUsername($name)
+    {
+            $st = self::$db->prepare(
+               "SELECT * FROM user
+                   WHERE username = :name"
+            );
+            $st->execute(array(
+               ':name' => $name)
+            );
+            $result = $st->fetch(PDO::FETCH_ASSOC);
+            if(isSet($result))
+            {
+                $this->username = $result['username'];
+                $this->password = $result['password'];
+                $this->email = $result['email'];
+                $this->userID = $result['userID'];
+                return 0;   // User successfully loaded!
+            }
+            else
+            {
+                return 1; // User not found!
+            }
+    }
+    
     public function save()  //update or create the user
     {
         if($this->userID == 0)
