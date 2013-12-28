@@ -2,7 +2,7 @@
 
 require_once('core/init/init.php');
 
-if(!isset($_GET['page']) || $_GET['page'] == ''){
+if(empty($_GET['page'])){
     $_GET['page'] = 'home';
 }
 
