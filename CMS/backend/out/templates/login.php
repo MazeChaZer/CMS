@@ -4,7 +4,7 @@
         <title>Admin Control Panel</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" media="handheld, projection, screen, tv" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,900italic,900,700italic,700,500italic|Raleway:400,200" />
-        <link rel="stylesheet" href="out/fontawesome/font-awesome.min.css" />
+        <link rel="stylesheet" href="out/fontawesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="out/css/main.css" />
         <link rel="stylesheet" href="out/css/login.css" />
     </head>
@@ -24,7 +24,7 @@
                 </footer>
             </header>
                 <section role="main">
-                    <form action="Admin" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
+                    <form action="<?php echo BACKENDURL; ?>index.php?page=login" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
                         <section>
                             <p>
                                 <label for="cms-logindata[username]">Benutzername&nbsp;</label>
@@ -37,7 +37,7 @@
                             <p class="cms-table-cell">
                                 <label for="cms-logindata[keepsession]">Sitzung speichern?&nbsp;</label>
                                 <input tabindex="3" type="radio" id="save-session" name="cms-logindata#keepsession" value="on" required checked />
-                                <label for="save-session" class="radioInput firstInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird gespeichert (Cookies werden gesetzt)">Speichern</label>
+                                <label for=Admin"save-session" class="radioInput firstInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird gespeichert (Cookies werden gesetzt)">Speichern</label>
                                 <input tabindex="4" type="radio" id="not-session" name="cms-logindata#keepsession" value="off" required />
                                 <label for="not-session" class="radioInput lastInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird nicht gespeichert">Nicht speichern</label>
                             </p>
@@ -58,6 +58,6 @@
         
         <script src="out/js/objects.js"></script>
         <script src="out/js/login.js"></script>
-        <script src="source/sys/res/js/default.js"></script>
+        <script src="out/js/default.js"></script>
     </body>
 </html>
