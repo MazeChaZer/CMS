@@ -9,7 +9,7 @@ use PDO;
  *
  * @author Lukas
  */
-class Data extends Entity{
+class Data extends Model{
     
     private $dataID = 0;
     private $name;

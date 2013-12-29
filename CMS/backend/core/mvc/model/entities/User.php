@@ -10,7 +10,7 @@ namespace ITC\CMS;
 
 use PDO;
 
-class User extends Entity {
+class User extends Model {
     
     private $userID = 0;
     

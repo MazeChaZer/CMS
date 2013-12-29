@@ -9,7 +9,7 @@ use PDO;
  *
  * @author Lukas
  */
-class Entry extends Entity {
+class Entry extends Model {
     
     private $entryID = 0;
     private $authorID;
