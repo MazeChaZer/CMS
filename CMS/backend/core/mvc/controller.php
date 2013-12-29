@@ -1,5 +1,7 @@
 <?php
 
+namespace ITC\CMS;
+
 class Controller
 {
     protected $view;
@@ -18,3 +20,5 @@ class Controller
         $this->isPublic = $isPublic;
     }
 }
+
+?>

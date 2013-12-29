@@ -1,5 +1,7 @@
 <?php
 
+// namespace ITC\CMS;
+
 require_once('core/init/init.php');
 
 if(empty($_GET['page'])){
@@ -7,7 +9,7 @@ if(empty($_GET['page'])){
 }
 
 require_once('core/mvc/controller/'.$_GET['page'].'.php');
-$classname = "c_".$_GET['page'];
+$classname = "ITC\\CMS\\c_".$_GET['page'];
 $controller = new $classname();
 
 if(!isset($_SESSION['user']) && !$controller->getIsPublic()) {

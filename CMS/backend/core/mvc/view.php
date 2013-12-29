@@ -6,6 +6,8 @@
  * last edit: 02/11/2013
  * author: DD
  */
+ 
+namespace ITC\CMS;
 
 class View
 {

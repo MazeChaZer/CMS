@@ -1,13 +1,15 @@
 <?php
 
+namespace ITC\CMS;
+
 class c_home extends controller {
 
-//     public function __construct(){
-// 	$this->isPublic = TRUE;
-//     }
+    public function __construct(){
+	parent::__construct("home");
+    }
     
     public function start(){
-	echo 'home';
+	$this->view->out();
     }
     
 }
