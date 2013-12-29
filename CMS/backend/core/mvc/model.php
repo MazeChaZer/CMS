@@ -15,7 +15,7 @@ class Model
 {
     protected static $db;
    
-    public static function __construct()
+    public function __construct()
     {
         if(!isset(self::$db))
         {
