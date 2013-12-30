@@ -12,7 +12,7 @@
         <div class="cms-acp">
             <header>
                 <nav>
-                    <a class="fa fa-home" tooltip tooltip-text="Frontend" tooltip-direction="bottom" href="<?= BASEURL ?>" target="_blank"></a>  
+                    <a class="fa fa-home" tooltip tooltip-text="Frontend" tooltip-direction="bottom" href="<?= URL ?>" target="_blank"></a>  
                     <a class="fa fa-sign-out" tooltip tooltip-text="Logout" tooltip-direction="bottom" href="?page=logout"></a> 
                 </nav>
                 <menu role="menu">
@@ -46,7 +46,7 @@
                 </section>
             </section>
             <footer>
-                <span>&copy; 2013 WIR</span>
+                <span>&copy; 2013 Dobschlaffff</span>
             </footer>
         </div>
     </body>
