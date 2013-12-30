@@ -28,7 +28,7 @@
                         <section>
                             <p>
                                 <label for="cms-logindata[username]">Benutzername&nbsp;</label>
-                                <input tabindex="1" type="text" name="cms-logindata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{1,}[a-zA-Z0-9-._]{5,31}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." autofocus />
+                                <input tabindex="1" type="text" name="cms-logindata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{1,}[a-zA-Z0-9-._]{5,31}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." />
                             </p>
                             <p>
                                 <label for="cms-logindata[password]">Passwort&nbsp;</label>

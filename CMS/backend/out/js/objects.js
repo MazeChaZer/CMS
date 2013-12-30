@@ -100,7 +100,7 @@ var Layer = function ( o )
     {
         
         this.object = document.createElement ( 'div' );
-          this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0; width: 100%; height: 100% ' );
+          this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0; width: 100%; height: 100%; ' );
 
         this.container = document.createElement ( 'div' );
 
@@ -230,6 +230,20 @@ var AjaxForm = function ( f, o )
             type: 1
         }   );
         
+        if ( this.object.getAttribute ( 'action' ) .indexOf ( '?' ) !== -1 )
+        {
+        
+            this.object.action = this.object.getAttribute ( 'action' ) + '&ajax=true&view=false';
+        
+        }
+        else
+        {
+        
+            this.object.action = this.object.getAttribute ( 'action' ) + '?ajax=true&view=false';
+        
+        }
+
+        
         if ( this.options.init && this.options.init !== null )
         {
             
@@ -246,7 +260,7 @@ var AjaxForm = function ( f, o )
         
         var i, _i = this.object.querySelectorAll ( 'input:not([type="submit"]):not([type="reset"]):not([type="button"])' );
         
-        this.parameters = 'ajax&view=false';
+        this.parameters = 'ajaxForm=1';
         
         for ( i = 0; i < _i.length; i++ )
         {
@@ -273,7 +287,7 @@ var AjaxForm = function ( f, o )
             this.options.submit.apply ( this );
             
         }
-      
+                    
         this.request.send ( {
             url: this.object.action,
             type: this.object.method,
@@ -281,7 +295,7 @@ var AjaxForm = function ( f, o )
             syncType: true,
             dataType: 'json',
             complete: function ( e, r ) {
-     
+               
                 if ( e.success && e.error === 0 )
                 {
                     
@@ -323,7 +337,7 @@ var AjaxForm = function ( f, o )
     
     this.handleSuccess = function ( r )
     {
-        
+                  
         this.request.send ( {
             url: 'index.php/.admin',
             type: 'get',
@@ -429,7 +443,7 @@ var FormValidator = function ( f, o )
 
     this.setEvents = function ( )
     {
-
+                    
         this.object.addEventListener ( 'keydown', function ( ) {
 
             fn.validate.apply ( fn );
@@ -513,10 +527,15 @@ var Tooltip = function ( )
 
     // user specific
     this.class = 'cms-tooltip';
+    this.arrowClass = 'cms-tooltip-arrow';
+    this.containerClass = 'cms-tooltip-container';
+    
     this.position = 'top';
-    this.margin = [ 6, 8 ];
+    this.margin = [ 6, 4 ];
     this.defaultDirection = 'bottom'; //top || right || bottom || left
 
+    this.arrowWidth = 10;
+    this.arrowStyle = 'rgb( 33, 33, 33 )';
 
     //init
     this.init = function ( )
@@ -526,11 +545,22 @@ var Tooltip = function ( )
             this.object.setAttribute ( 'class', this.class );
             this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0 ' );
 
+        this.arrow = document.createElement ( 'div' );
+            this.arrow.setAttribute ( 'class', this.arrowClass );
+            
+        this.container = document.createElement ( 'div' );
+            this.container.setAttribute ( 'class', this.containerClass );
+        
         this.textContainer = document.createElement ( 'span' );
+
+        this.fixed = false;
 
         this.hide.apply ( this );
 
-        this.object.appendChild ( this.textContainer );
+        this.object.appendChild ( this.arrow );
+        this.object.appendChild ( this.container );
+        
+        this.container.appendChild ( this.textContainer );
 
         document.body.appendChild ( this.object );
 
@@ -548,21 +578,43 @@ var Tooltip = function ( )
         this.hide.apply ( this );
 
         var l = t = 0; // left, top
-
+        
+        this.object.innerHTML = '';
+        
         switch ( this.position )
         {
 
             default: case 'top':
 
-                l = x - ( ( w > this.width ) ? w - this.width : this.width - w ) / 2;
+                l = x - ( ( w > this.width ) ? (-1) * ( w - this.width - ( w - this.width ) / 2 ) : this.width - w ) / 2;
                 t = y - this.height - this.margin[ 1 ];
-
+                
+                this.arrow.style.borderWidth = this.arrowWidth + 'px ' + this.arrowWidth + 'px 0 ' + this.arrowWidth + 'px';
+                this.arrow.style.float = 'none';
+                this.arrow.style.top = 0;
+                this.arrow.style.margin = '0 0 0 ' + ( ( this.width / 2 ) - this.arrowWidth ) + 'px';
+                this.arrow.style.display = this.container.style.display = 'block';
+                this.arrow.style.borderColor = this.arrowStyle + ' transparent transparent transparent';
+                
+                this.object.appendChild ( this.container );
+                this.object.appendChild ( this.arrow );
+                
                 break;
 
             case 'bottom':
 
-                l = x - ( ( w > this.width ) ? w - this.width : this.width - w ) / 2;
+                l = x - ( ( w > this.width ) ? (-1) * ( w - this.width  - ( w - this.width ) / 2 ) : this.width - w ) / 2;
                 t = y + h + this.margin[ 1 ];
+                
+                this.arrow.style.borderWidth = '0 ' + this.arrowWidth + 'px ' + this.arrowWidth + 'px ' + this.arrowWidth + 'px';
+                this.arrow.style.float = 'none';
+                this.arrow.style.top = 0;
+                this.arrow.style.margin = '0 0 0 ' + ( ( this.width / 2 ) - this.arrowWidth ) + 'px';
+                this.arrow.style.display = this.container.style.display = 'block';
+                this.arrow.style.borderColor = 'transparent transparent ' + this.arrowStyle + ' transparent';
+
+                this.object.appendChild ( this.arrow );
+                this.object.appendChild ( this.container );
 
                 break;
 
@@ -571,12 +623,34 @@ var Tooltip = function ( )
                 l = x - this.width - this.margin[ 0 ];
                 t = y - ( ( h > this.height ) ? h - this.height : this.height - h );
 
+                this.arrow.style.borderWidth = this.arrowWidth + 'px 0 ' + this.arrowWidth + 'px ' + this.arrowWidth + 'px';
+                this.arrow.style.top = ( ( this.height / 2 ) - this.arrowWidth ) + 'px';
+                this.arrow.style.margin = 0;
+                this.arrow.style.float = 'right';
+                this.arrow.style.borderColor = 'transparent transparent transparent ' + this.arrowStyle;
+                
+                this.container.style.marginRight = this.arrowWidth + 'px';
+                
+                this.object.appendChild ( this.arrow );
+                this.object.appendChild ( this.container );
+
                 break;
 
             case 'right':
 
                 l = x + w + this.margin[ 0 ];
                 t = y - ( ( h > this.height ) ? h - this.height : this.height - h );
+
+                this.arrow.style.borderWidth = this.arrowWidth + 'px ' + this.arrowWidth + 'px ' + this.arrowWidth + 'px 0';
+                this.arrow.style.top = ( ( this.height / 2 ) - this.arrowWidth ) + 'px';
+                this.arrow.style.margin = 0;
+                this.arrow.style.float = 'left';
+                this.arrow.style.borderColor = 'transparent ' + this.arrowStyle + ' transparent transparent';
+
+                this.container.style.marginLeft = this.arrowWidth + 'px';
+
+                this.object.appendChild ( this.arrow );
+                this.object.appendChild ( this.container );
 
                 break;
 
@@ -616,29 +690,40 @@ var Tooltip = function ( )
 
     this.hide = function ( )
     {
+       
+        if ( !this.fixed )
+        {
+           
+            this.visible = false;
+            this.object.style.display = 'none';
+            this.object.style.opacity = 0;
 
-        this.visible = false;
-        this.object.style.display = 'none';
-        this.object.style.opacity = 0;
+        }
 
     };
 
     this.setText = function ( t )
     {
+        
+        this.textContent = document.createTextNode( t);
 
-        this.textContent = t;
-
-        this.textContainer.innerText = this.textContent;
+        this.textContainer.innerHTML = '';
+        this.textContainer.appendChild ( this.textContent );
 
     };
 
     this.toElement = function ( e )
     {
-        var pos = e.getBoundingClientRect();
+        if ( !this.fixed )
+        {
+            
+            var pos = e.getBoundingClientRect ( );
+            
+            this.setText.apply ( this, [ e.getAttribute ( 'tooltip-text' ) ] );
+            this.reposition.apply ( this, [ pos.left, pos.top, e.offsetWidth, e.offsetHeight ] );
+            this.show.apply ( this );
 
-        this.setText.apply ( this, [ e.getAttribute ( 'tooltip-text' ) ] );
-        this.reposition.apply ( this, [ pos.left, pos.top, e.offsetWidth, e.offsetHeight ] );
-        this.show.apply ( this );
+        }
 
     };
 
@@ -799,7 +884,7 @@ var AjaxRequest = function ( )
         dataType: 'text' 
     }; 
    
-    if( typeof XMLHttpRequest != 'undefined' ) 
+    if( typeof XMLHttpRequest !== 'undefined' ) 
     {
   
       this.request = new XMLHttpRequest ( ); 
@@ -860,7 +945,7 @@ var AjaxRequest = function ( )
         {
         
           var response = null; 
-                       
+                    
           switch ( fn.requestParams.dataType.toLowerCase( ) ) 
           { 
     
@@ -881,7 +966,18 @@ var AjaxRequest = function ( )
                 if ( this.responseText && this.responseText.length > 0 )  
                 {          
             
-                    response = eval ( '(' + this.responseText + ')' ); 
+                    try 
+                    {
+                    
+                        response = eval ( '(' + this.responseText + ')' ); 
+                  
+                    }
+                    catch ( e )
+                    {
+                    
+                        console.log ( this.responseText );
+                    
+                    }
                   
                 }
               

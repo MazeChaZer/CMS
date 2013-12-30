@@ -157,16 +157,33 @@ html>body {
 }
 
 *>*.cms-tooltip {
-    padding: 10px 10px 5px 10px;
+    position: absolute;
+}
 
+*>*.cms-tooltip>*.cms-tooltip-arrow {
+    position: relative;
+    
+    width: 0;
+    height: 0;
+    
+    border-width: 0 20px 20px 20px; 
+    border-style: solid;
+    border-color: transparent;
+}
+
+*>*.cms-tooltip>*.cms-tooltip-container {
+    position: relative;
+    
+    padding: 10px 10px 5px 10px;
+    
     background-color: rgb( 33, 33, 33 );
 
     border-radius: 4px;
-
+    
     box-shadow: 0 1px 4px rgba( 55, 55, 55, .55 );
 }
 
-*>*.cms-tooltip>span {
+*>*.cms-tooltip>*.cms-tooltip-container>span {
     color: rgb( 244, 244, 244 );
     font-family: 'Raleway';
     font-size: 11pt;
