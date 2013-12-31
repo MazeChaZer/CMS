@@ -20,8 +20,9 @@ CREATE TABLE IF NOT EXISTS `cms`.`user` (
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(512) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `passwordEncrypted` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `cms`.`uploadedData` (
   `dataID` INT(11) NOT NULL,
