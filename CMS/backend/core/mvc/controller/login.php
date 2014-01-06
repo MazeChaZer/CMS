@@ -15,7 +15,7 @@ class c_login extends controller {
         if(isset($_POST['cms-logindata#username'])){
             $user = new User();
             if($user->loadByUsername($_POST['cms-logindata#username']) == 0){
-                if($user->getPassword() == $_POST['cms-logindata#password']){
+                if($user->checkPassword($_POST['cms-logindata#password'])){
                     $_SESSION['user'] = $user->getUserID();
                     header('Location: '.BACKENDURL.'index.php?page=home');
                     die();

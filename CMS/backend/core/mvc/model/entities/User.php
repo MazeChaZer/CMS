@@ -17,6 +17,7 @@ class User extends Model {
     private $username;
     private $email;
     private $password;
+    private $passwordEncrypted = false;
 
     public function setUsername($username)
     {
@@ -34,9 +35,18 @@ class User extends Model {
         return 0;
     }
     
-    public function setPassword($password)
+    public function setPassword($password, $useEncryption)
     {
-        $this->password = $password;
+        if($useEncryption)
+        {
+            $this->password = hash("sha512", $password.$this->email);
+            $this->passwordEncrypted = true;
+        }
+        else
+        {
+            $this->password = $password; 
+            $this->passwordEncrypted = false;
+        }
         return 0;
     }
     
@@ -50,9 +60,16 @@ class User extends Model {
         return $this->email;
     }
     
-    public function getPassword()
+    public function checkPassword($password)
     {
-        return $this->password;
+        if($this->passwordEncrypted)
+        {
+            return (hash("sha512", $password.$this->email) == $this->password);
+        }
+        else
+        {
+            return ($this->$password == $password);  
+        }
     }
     
     private function getNewID()
@@ -79,6 +96,7 @@ class User extends Model {
                 $this->password = $result['password'];
                 $this->email = $result['email'];
                 $this->userID = $result['userID'];
+                $this->passwordEncrypted = $result['passwordEncrypted'];
                 return 0;   // User successfully loaded!
             }
             else
@@ -103,6 +121,7 @@ class User extends Model {
                 $this->password = $result['password'];
                 $this->email = $result['email'];
                 $this->userID = $result['userID'];
+                $this->passwordEncrypted = $result['passwordEncrypted'];
                 return 0;   // User successfully loaded!
             }
             else
@@ -118,16 +137,17 @@ class User extends Model {
             $this->userID = $this->getNewID();
             $st = self::$db->prepare(
                 "INSERT INTO user
-                    ( userID, username, email, password, create_time )
+                    ( userID, username, email, password, create_time, passwordEncrypted )
                  VALUES 
-                    ( :userID, :username, :email, :password, :create_time )"
+                    ( :userID, :username, :email, :password, :create_time, :passwordEncrypted )"
             );
             $st->execute(array(
                 ':userID' => $this->userID,
                 ':username' => $this->username,
                 ':email' => $this->email,
                 ':password' => $this->password,
-                ':create_time' => date("Y-m-d H:i:s",time()))
+                ':create_time' => date("Y-m-d H:i:s",time()),
+                ':passwordEncrypted' => $this->passwordEncrypted)
             );
             return 0;
         }
@@ -138,14 +158,16 @@ class User extends Model {
                     SET  
                         username = :username,
                         email = :email,
-                        password = :password
+                        password = :password,
+                        passwordEncrypted = :passwordEncrypted
                      WHERE userID = :userID"
              );
              $st->execute(array(
                 ':userID' => $this->userID,
                 ':username' => $this->username,
                 ':email' => $this->email,
-                ':password' => $this->password)
+                ':password' => $this->password,
+                ':passwordEncrypted' => $this->passwordEncrypted)
              );
              return 0;
         }
@@ -182,6 +204,7 @@ class User extends Model {
                 $this->password = $result['password'];
                 $this->email = $result['email'];
                 $this->userID = $result['userID'];
+                $this->passwordEncrypted = $result['passwordEncrypted'];
                 return 0;   // User successfully loaded!
             }
             else
