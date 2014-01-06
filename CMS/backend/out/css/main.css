@@ -58,13 +58,22 @@ html>body {
 *>*.cms-color-templates {
     color: rgb( 201, 158, 41 );
 }
+*>*.cms-bg-templates {
+    background-color: rgb( 201, 158, 41 );
+}
 
 *>*.cms-color-styles {
     color: rgb( 75, 117, 45 );
 }
+*>*.cms-bg-styles {
+    background-color: rgb( 75, 117, 45 );
+}
 
 *>*.cms-color-scripts {
-    color: rgb( 230, 106, 87 );
+    color: rgb( 106, 106, 230 );
+}
+*>*.cms-bg-scripts {
+    background-color: rgb( 106, 106, 230 );
 }
 
 *>*.cms-alright {
@@ -79,6 +88,44 @@ html>body {
     color: rgb( 222, 22, 22 );
 }
 
+*>*.cms-smooth {
+    color: rgb( 66, 66, 66);
+}
+
+/* size styling */
+*>*.cms-xsmall {
+    font-size: .5em;
+}
+
+*>*.cms-small {
+    font-size: .75em;
+}
+
+*>*.cms-large {
+    font-size: 1.25em;
+}
+
+*>*.cms-xlarge {
+    font-size: 1.5em;
+}
+
+/* font styling */
+*>*.cms-text-left {
+    text-align: left;
+}
+
+*>*.cms-text-center {
+    text-align: center;
+}
+
+*>*.cms-text-right {
+    text-align: right;
+}
+
+*>*.cms-bold {
+    font-weight: bold;
+}
+
 /* styling */
 
 *>*.cms-important {
@@ -88,7 +135,33 @@ html>body {
     border-radius: 8px;
 }
 
+*>*.cms-warning-box {
+    margin: .3em 0;
+    padding: .4em;
+    
+    background-color: rgb( 255, 255, 255 );
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb ( 222, 22, 222 );
+}
+
 /* displaying */
+*>*.cms-inline {
+    display: inline;
+}
+
+*>*.cms-block {
+    display: block;
+}
+
+*>*.cms-inline-block {
+    display: inline-block;
+}
+
+*>*.cms-cleared {
+    clear: both;
+}
 
 *>*.cms-table {
     display: table;
@@ -101,6 +174,18 @@ html>body {
 /* positioning */
 *>*.cms-padding {
   padding: .5em;
+}
+*>*.cms-padding-top {
+  padding-top: .5em;
+}
+*>*.cms-padding-right {
+  padding-right: .5em;
+}
+*>*.cms-padding-bottom {
+  padding-bottom: .5em;
+}
+*>*.cms-padding-left {
+  padding-left: .5em;
 }
 
 *>*.cms-margin {
@@ -117,7 +202,7 @@ html>body {
 }
 
 *>*.cms-full {
-    width: 100%;
+    width: 100% !important;
 }
 
 *>*.cms-half {
@@ -192,15 +277,14 @@ html>body {
 
 /* ajaxForms */
 
-*>*.cms-ajaxForm>.cms-ajaxForm-layer {
+*>.cms-layer {
   background-color: rgba( 33, 33, 33, .1 );
 }
 
-*>*.cms-ajaxForm>.cms-ajaxForm-layer>div {
+*>*.cms-layer>div {
   margin: 5%;
   
   width: 90%;
-  height: 80%;
   
   background-color: rgb( 255, 255, 255 );
   
@@ -209,13 +293,13 @@ html>body {
   display: block;
 }
 
-*>*.cms-ajaxForm>.cms-ajaxForm-layer>div>section.text {
+*>*.cms-layer>div>section.text {
   padding: .4em;
   
   font-size: 13pt;
 }
 
-*>*.cms-ajaxForm>.cms-ajaxForm-layer>div>section.text>h2 {
+*>*.cms-layer>div>section.text>h2 {
     margin: .1em 0 .3em 0;
     
     color: rgb( 66, 66, 66 );
@@ -225,11 +309,12 @@ html>body {
     text-shadow: 0 1px rgb( 88, 88, 88 );
 }
 
-*>*.cms-ajaxForm>.cms-ajaxForm-layer>div>section.control {
+*>*.cms-layer>div>section.control {
   text-align: center;
 }
 
-*>*.cms-ajaxForm>.cms-ajaxForm-layer>div>section.control>button {
+*>*.cms-layer>div>section.control>button {
+    margin: 0 .15em;
     padding: .3em 1.5em;
     
     color: rgb( 51, 51, 51 );

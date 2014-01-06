@@ -18,7 +18,10 @@
                 <footer>
                     <nav>
                         <a href="<?= URL; ?>" tooltip tooltip-text="Zurück zur Homepage" tooltip-direction="left">
-                            <span class="fa fa-home"></span>
+                            <figure class="fa fa-home"></figure>
+                        </a>
+                        <a href="?page=register" tooltip tooltip-text="Registrieren" tooltip-direction="right">
+                            <figure class="fa fa-key"></figure>
                         </a>
                     </nav>
                 </footer>
@@ -27,15 +30,15 @@
                     <form action="<?= BACKENDURL; ?>index.php?page=login" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
                         <section>
                             <p>
-                                <label for="cms-logindata[username]">Benutzername&nbsp;</label>
+                                <label for="cms-logindata#username">Benutzername&nbsp;</label>
                                 <input tabindex="1" type="text" name="cms-logindata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{1,}[a-zA-Z0-9-._]{5,31}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." />
                             </p>
                             <p>
-                                <label for="cms-logindata[password]">Passwort&nbsp;</label>
+                                <label for="cms-logindata#password">Passwort&nbsp;</label>
                                 <input tabindex="2" type="password" name="cms-logindata#password" placeholder="*********" maxlength="32" required pattern="^[a-zA-Z0-9._*!?#+:,;-_]{6,32}" tooltip tooltip-direction="bottom" tooltip-text="Das Passwort muss aus mindestens 6 Zeichen bestehen." />
                             </p>
                             <p class="cms-table-cell">
-                                <label for="cms-logindata[keepsession]">Sitzung speichern?&nbsp;</label>
+                                <label for="cms-logindata#keepsession#">Sitzung speichern?&nbsp;</label>
                                 <input tabindex="3" type="radio" id="save-session" name="cms-logindata#keepsession" value="on" required checked />
                                 <label for=Admin"save-session" class="radioInput firstInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird gespeichert (Cookies werden gesetzt)">Speichern</label>
                                 <input tabindex="4" type="radio" id="not-session" name="cms-logindata#keepsession" value="off" required />
