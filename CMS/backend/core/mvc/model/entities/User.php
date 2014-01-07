@@ -68,13 +68,13 @@ class User extends Model {
         }
         else
         {
-            return ($this->$password == $password);  
+            return ($this->password == $password);
         }
     }
     
     private function getNewID()
     {
-        $SQL = "SELECT MAX(userID) AS maxID FROM USER;";
+        $SQL = "SELECT MAX(userID) AS maxID FROM user;";
         $stmt = self::$db->query($SQL);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['maxID'] + 1;
@@ -90,7 +90,7 @@ class User extends Model {
                ':email' => $email)
             );
             $result = $st->fetch(PDO::FETCH_ASSOC);
-            if(isSet($result))
+            if(!empty($result))
             {
                 $this->username = $result['username'];
                 $this->password = $result['password'];
@@ -115,7 +115,7 @@ class User extends Model {
                ':name' => $name)
             );
             $result = $st->fetch(PDO::FETCH_ASSOC);
-            if(isSet($result))
+            if(!empty($result))
             {
                 $this->username = $result['username'];
                 $this->password = $result['password'];
@@ -198,7 +198,7 @@ class User extends Model {
                ':userID' => $userID)
             );
             $result = $st->fetch(PDO::FETCH_ASSOC);
-            if(isSet($result))
+            if(!empty($result))
             {
                 $this->username = $result['username'];
                 $this->password = $result['password'];
@@ -261,7 +261,7 @@ class User extends Model {
                 ':rechtID' => $RechtID)
             );
             $result = $st->fetch(PDO::FETCH_ASSOC);
-            if(isSet($result) && $result['recht'] = 1)
+            if(!empty($result) && $result['recht'] = 1)
             {
                 return true;
             }
