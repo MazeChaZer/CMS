@@ -30,7 +30,6 @@
                     <form action="<?= BACKENDURL; ?>index.php?page=register" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
                         <section>
                             <?php
-                             var_dump($this);
                                 if(isset($this->data['usernamealreadyexists']) && $this->data['usernamealreadyexists'])
                                 {
                                     print('<aside class="cms-warning-box cms-warning cms-small cms-block cms-cleared">Der Benutzername existiert bereits. Bitte einen anderen wählen.</aside>');
