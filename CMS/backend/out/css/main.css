@@ -202,7 +202,7 @@ html>body {
 }
 
 *>*.cms-full {
-    width: 100% !important;
+    width: 100%;
 }
 
 *>*.cms-half {

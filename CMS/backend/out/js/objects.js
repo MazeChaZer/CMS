@@ -100,7 +100,7 @@ var Layer = function ( o )
     {
         
         this.object = document.createElement ( 'div' );
-          this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0; width: 100%; height: 100%; ' );
+          this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 99999; ' );
 
         this.container = document.createElement ( 'div' );
 
@@ -129,16 +129,7 @@ var Layer = function ( o )
         this.textObject.style.height = ( this.container.offsetHeight - 52 ) + 'px';
         this.controlObject.style.height = '52px';
         
-        switch ( this.options.type )
-        {
-    
-            case 1:
-        
-                this.addButton.apply ( this, [ 'Okay', 1 ] );
-
-                break;
-    
-        }
+        this.switchType.apply ( this, [ this.options.type ] );
         
         this.hide.apply ( this );
         
@@ -159,37 +150,93 @@ var Layer = function ( o )
     
     };
     
-    this.html = function ( h )
+    this.html = function ( h, t )
     {
+        
         this.textObject.innerHTML = '<h2>Warnung</h2>';
+        
+        if ( t )
+        {
+        
+            this.textObject.innerHTML = '<h2>' + t + '</h2>';
+            
+        }
+       
         this.textObject.innerHTML += h;
     
     };
     
-    this.addButton = function ( t, ty )
+    this.switchType = function ( t, text, ft )
+    {
+       
+        this.clearButtons.apply ( this );
+      
+        switch ( t )
+        {
+    
+            case 1:
+        
+                this.addButton.apply ( this, [ ( ( text && text[ 0 ] ) ? text[ 0 ] : 'Okay' ), ( ( ft ) ? ft : null ) ] );
+
+                break;
+                
+            case 2:
+              
+                this.addButton.apply ( this, [ ( ( text && text[ 0 ] ) ? text[ 0 ] : 'Ja' ), ( ( ft && ft[ 0 ] ) ? ft[ 0 ] : null ) ] );
+                this.addButton.apply ( this, [ ( ( text && text[ 1 ] ) ? text[ 1 ] : 'Nein' ), ( ( ft && ft[ 1 ] ) ? ft[ 1 ] : null ) ] );
+                
+                break;
+        }
+        
+        this.object.focus ( );
+        
+    };
+    
+    this.clearButtons = function ( )
+    {
+      
+        this.controlObject.innerHTML = '';
+        
+    };
+    
+    this.addButton = function ( t, fa )
     {
     
         var b = document.createElement ( 'button' );
             b.type = 'button';
             b.innerText = t;
-        
-        switch ( ty )
-        {
-        
-            case 1: default:
             
-                b.onclick = function ( )
-                {
-                
+            if ( fa )
+            {
+
+                b.onclick = fa;
+
+            }
+            else
+            {
+
+                b.onclick = function ( ) {
+
                     fn.hide.apply ( fn );
-                    
+
                     return false;
+
+                };
                 
-                } ;
-            
-                break;
-        
-        }
+                document.body.addEventListener ( 'keydown', function ( e ) {
+                    
+                    if ( fn.object.style.display !== 'none' && ( e.keyCode === 13 || e.keyCode === 27 ) )
+                    {
+                        
+                        fn.hide.apply ( fn )
+                                
+                        return false;
+                        
+                    };
+                    
+                }, false   );
+
+            }
             
         this.controlObject.appendChild ( b );
     
@@ -226,7 +273,7 @@ var AjaxForm = function ( f, o )
         
         this.validator = new Layer ( { 
             parent: this.object,
-            class: 'cms-ajaxForm-layer',
+            class: 'cms-layer',
             type: 1
         }   );
         
@@ -295,7 +342,7 @@ var AjaxForm = function ( f, o )
             syncType: true,
             dataType: 'json',
             complete: function ( e, r ) {
-               
+             
                 if ( e.success && e.error === 0 )
                 {
                     
@@ -337,24 +384,21 @@ var AjaxForm = function ( f, o )
     
     this.handleSuccess = function ( r )
     {
-                  
-        this.request.send ( {
-            url: 'index.php/.admin',
-            type: 'get',
-            data: null,
-            syncType: true,
-            dataType: 'text',
-            complete: function ( e, r ) {
-                
-                if ( fn.options.success && fn.options.success !== null )
-                {
-                    
-                    fn.options.success.apply ( fn, [ e, r ] );
-                    
-                }
-                
-            }
-        }   );
+ 
+        if ( this.options.error && this.options.error !== null )
+        {
+            
+            this.options.success.apply ( this );
+            
+        }
+        else
+        {
+        
+            this.validator.show.apply ( this.validator );
+            this.validator.html.apply ( this.validator, [ '<span>Das Formular wurde erfolgreich abgesendet.</span>' ] );
+        
+        }
+
         
     };
     
@@ -543,7 +587,7 @@ var Tooltip = function ( )
 
         this.object = document.createElement ( 'div' );
             this.object.setAttribute ( 'class', this.class );
-            this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0 ' );
+            this.object.setAttribute ( 'style', 'position: absolute; left: 0; top: 0; z-index: 999 ' );
 
         this.arrow = document.createElement ( 'div' );
             this.arrow.setAttribute ( 'class', this.arrowClass );
@@ -704,11 +748,10 @@ var Tooltip = function ( )
 
     this.setText = function ( t )
     {
-        
-        this.textContent = document.createTextNode( t);
 
-        this.textContainer.innerHTML = '';
-        this.textContainer.appendChild ( this.textContent );
+        this.textContent = t;
+
+        this.textContainer.innerText = this.textContent;
 
     };
 
@@ -745,6 +788,56 @@ var Tooltip = function ( )
 
         }
 
+    };
+    
+    this.bindElement = function ( e, f )
+    {
+      
+        e.addEventListener ( 'mouseover', function ( ) {
+
+            if ( this.getAttribute ( 'tooltip-direction' ) )
+            {
+
+                fn.setPosition.apply ( fn, [ ( this.getAttribute ( 'tooltip-direction' ) || fn.defaultDirection ) ] );
+
+            }
+
+            fn.toElement.apply ( fn, [ this ] );
+
+        }, false	);
+
+        e.addEventListener ( 'mouseout', function ( ) {
+
+            fn.hide.apply ( fn );
+
+        }, false	);
+
+        if ( f )
+        {
+
+            e.addEventListener ( 'focus', function ( ) {
+
+                if ( this.getAttribute ( 'tooltip-direction' ) )
+                {
+
+                    fn.setPosition.apply ( fn, [ ( this.getAttribute ( 'tooltip-direction' ) || fn.defaultDirection ) ] );
+
+                }
+
+                fn.toElement.apply ( fn, [ this ] );
+                fn.fixed = true;
+
+            }, false    );
+
+            e.addEventListener ( 'blur', function ( ) {
+
+                fn.fixed = false;
+                fn.hide.apply ( fn );
+
+            }, false    );
+
+        }
+        
     };
 
     //
@@ -884,7 +977,7 @@ var AjaxRequest = function ( )
         dataType: 'text' 
     }; 
    
-    if( typeof XMLHttpRequest !== 'undefined' ) 
+    if( typeof XMLHttpRequest != 'undefined' ) 
     {
   
       this.request = new XMLHttpRequest ( ); 
@@ -976,6 +1069,8 @@ var AjaxRequest = function ( )
                     {
                     
                         console.log ( this.responseText );
+                        
+                        response = { success: false, errorMessage: 'Es trat ein Fehler bei der Übertragung auf. Bitte Überprüfen Sie das System.' };
                     
                     }
                   

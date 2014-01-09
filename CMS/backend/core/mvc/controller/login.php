@@ -34,7 +34,6 @@ class c_login extends controller {
         if(isset($_SESSION['loginfailed'])){
             $this->view->setData(array('loginfailed' => True));
             unset($_SESSION['loginfailed']);
-            echo 'loginfailed'; //#DEBUG
         }
         $this->view->out();
     }

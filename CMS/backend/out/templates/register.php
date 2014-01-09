@@ -29,6 +29,13 @@
                 <section role="main">
                     <form action="<?= BACKENDURL; ?>index.php?page=register" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
                         <section>
+                            <?php
+                             var_dump($this);
+                                if(isset($this->data['usernamealreadyexists']) && $this->data['usernamealreadyexists'])
+                                {
+                                    print('<aside class="cms-warning-box cms-warning cms-small cms-block cms-cleared">Der Benutzername existiert bereits. Bitte einen anderen wählen.</aside>');
+                                }
+                            ?>
                             <p>
                                 <label for="cms-registerdata#username">gewünschter Benutzername&nbsp;</label>
                                 <input tabindex="1" type="text" name="cms-registerdata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{1,}[a-zA-Z0-9-._]{5,31}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." />
@@ -52,9 +59,6 @@
                     </form>
                 </section>
         </div>
-        <footer>
-                <span>&copy; 2013 Menschen</span>
-        </footer>
         <script src="out/js/objects.js"></script>
         <script src="out/js/register.js"></script>
         <script src="out/js/default.js"></script>

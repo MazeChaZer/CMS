@@ -29,6 +29,12 @@
                 <section role="main">
                     <form action="<?= BACKENDURL; ?>index.php?page=login" method="post" autocomplete="off" accept-charset="UTF-8" target="_self">
                         <section>
+                            <?php
+                                if(isset($this->data['loginfailed']) && $this->data['loginfailed'])
+                                {
+                                    print('<aside class="cms-warning-box cms-warning cms-small cms-block cms-cleared">Der Loginversuch ist fehlgeschlagen.</aside>');
+                                }
+                            ?>
                             <p>
                                 <label for="cms-logindata#username">Benutzername&nbsp;</label>
                                 <input tabindex="1" type="text" name="cms-logindata#username" placeholder="Administrator" maxlength="32" required pattern="^[a-zA-Z0-9]{1,}[a-zA-Z0-9-._]{5,31}$" tooltip tooltip-direction="bottom" tooltip-text="Der Benutzername muss aus mindestens 6 Zeichen bestehen." />
@@ -38,11 +44,11 @@
                                 <input tabindex="2" type="password" name="cms-logindata#password" placeholder="*********" maxlength="32" required pattern="^[a-zA-Z0-9._*!?#+:,;-_]{6,32}" tooltip tooltip-direction="bottom" tooltip-text="Das Passwort muss aus mindestens 6 Zeichen bestehen." />
                             </p>
                             <p class="cms-table-cell">
-                                <label for="cms-logindata#keepsession#">Sitzung speichern?&nbsp;</label>
+                                <label for="cms-logindata#keepsession">Sitzung speichern?&nbsp;</label>
                                 <input tabindex="3" type="radio" id="save-session" name="cms-logindata#keepsession" value="on" required checked />
-                                <label for=Admin"save-session" class="radioInput firstInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird gespeichert (Cookies werden gesetzt)">Speichern</label>
+                                <label for="save-session" class="radioInput firstInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird gespeichert (Cookies werden gesetzt)">Speichern</label>
                                 <input tabindex="4" type="radio" id="not-session" name="cms-logindata#keepsession" value="off" required />
-                                <label for="not-session" class="radioInput lastInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird nicht gespeichert">Nicht speichern</label>
+                                <label for="not-session" class="radioInput lastInput" tooltip tooltip-direction="bottom" tooltip-text="Die Sitzung wird nicht dauerhaft gespeichert">Nicht speichern</label>
                             </p>
                             <p class="cms-table-cell">
                                 <button type="submit" tabindex="5">
@@ -55,9 +61,6 @@
                     </form>
                 </section>
         </div>
-        <footer>
-                <span>&copy; 2013 Menschen</span>
-        </footer>
         <script src="out/js/objects.js"></script>
         <script src="out/js/login.js"></script>
         <script src="out/js/default.js"></script>
