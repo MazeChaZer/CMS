@@ -1,91 +1,3 @@
-/* List Wrapping */
-var WrapList = function ( o )
-{
-    var fn = this;
-    
-    //vars
-    this.object = o;
-    this.parentNode = null;
-    this.root = null;
-    this.children = null;
-    
-    //init
-    this.init = function ( )
-    {
-      
-        this.parentNode = this.object.querySelector ( 'ul>li' );
-        this.root = this.parentNode.querySelector ( '*.cms-root' );
-
-        this.children = this.parentNode.querySelectorAll ( 'ul' );
-        
-        this.hideChildren.apply ( this );
-        this.addEvents.apply ( this, [ this.root ] );
-        
-    };
-    
-    //fns
-    this.hideChildren = function ( )
-    {
-   
-        for ( var i = 0; i < this.children.length; i++ )
-        {
-    
-            this.children[ i ].style.display = 'none';
-            this.addEvents.apply ( this, [ this.children[ i ].querySelector ( 'li>a' ) ] );
-            
-        }
-        
-    };
-    
-    this.addEvents = function ( e )
-    {
-     
-        var i, el;
-
-        e.addEventListener ( 'mousedown', function ( )
-        {
-            
-            el = this.parentNode.querySelectorAll ( 'ul' );
-            
-            if ( el.length !== 0 )
-            {
-                
-                for ( i = 0; i < el.length; i++ )
-                {
-                    
-                    if ( el[ i ].parentNode !== this.parentNode )
-                    {
-                        
-                        continue;
-                        
-                    }
-                    
-                    if ( el[ i ].style.display === 'block' )
-                    {
-                    
-                        el[ i ].style.display = 'none';
-                        
-                    }
-                    else
-                    {
-                    
-                        el[ i ].style.display = 'block';
-                    
-                    }
-                    
-                }
-                
-            }
-            
-        }, false   );
-        
-    };
-    
-    //
-    this.init.apply ( this );
-    
-};
-
 /* Layer */
 var Layer = function ( o )
 {
@@ -245,186 +157,6 @@ var Layer = function ( o )
     //
     this.init.apply ( this );
 
-};
-
-/* AjaxForms */
-var AjaxForm = function ( f, o )
-{
-    
-    var fn = this;
-    
-    //vars
-    this.object = f;
-    this.options = o;
-    
-    this.request = null;
-    
-    this.class = 'cms-ajaxForm-layer';
-    this.validatorClass = 'null';
-    
-    // init
-    this.init = function ( )
-    {
-      
-        this.object.setAttribute ( 'class', ( ( this.object.getAttribute ( 'class ' ) ) ? ( this.object.getAttribute ( 'class' ) + 'cms-ajaxForm' ) : 'cms-ajaxForm' ) );
-      
-        this.setEvents.apply ( this );
-        this.request = new AjaxRequest ( );
-        
-        this.validator = new Layer ( { 
-            parent: this.object,
-            class: 'cms-layer',
-            type: 1
-        }   );
-        
-        if ( this.object.getAttribute ( 'action' ) .indexOf ( '?' ) !== -1 )
-        {
-        
-            this.object.action = this.object.getAttribute ( 'action' ) + '&ajax=true&view=false';
-        
-        }
-        else
-        {
-        
-            this.object.action = this.object.getAttribute ( 'action' ) + '?ajax=true&view=false';
-        
-        }
-
-        
-        if ( this.options.init && this.options.init !== null )
-        {
-            
-            this.options.init.apply ( this );
-            
-        }
-        
-        console.log ( 'AjaxForm mit Zielobjekt ' + this.object + ' initialisiert.' );
-        
-    };
-    
-    this.getInputs = function ( )
-    {
-        
-        var i, _i = this.object.querySelectorAll ( 'input:not([type="submit"]):not([type="reset"]):not([type="button"])' );
-        
-        this.parameters = 'ajaxForm=1';
-        
-        for ( i = 0; i < _i.length; i++ )
-        {
-            
-            this.parameters += '&' + ( _i[ i ].getAttribute ( 'name' ) || _i[ i ].name );
-            
-            if ( _i[ i ].value !== null )
-            {
-                
-                this.parameters += '=' + encodeURIComponent ( _i[ i ].value );
-                
-            }
-            
-        }
-  
-    };
-    
-    this.submit = function ( )
-    {
-        
-        if ( this.options.submit && this.options.submit !== null )
-        {
-            
-            this.options.submit.apply ( this );
-            
-        }
-                    
-        this.request.send ( {
-            url: this.object.action,
-            type: this.object.method,
-            data: this.parameters,
-            syncType: true,
-            dataType: 'json',
-            complete: function ( e, r ) {
-             
-                if ( e.success && e.error === 0 )
-                {
-                    
-                    fn.handleSuccess.apply ( fn, [ e ] );
-                    
-                }
-                else
-                {
- 
-                    fn.handleError.apply ( fn, [ e ] );
-                    
-                }  
-                
-            }
-        }   );
-        
-    };
-    
-    this.setEvents = function ( )
-    {
-        
-        this.object.addEventListener ( 'submit', function ( ) {
-         
-            fn.getInputs.apply ( fn );
-            fn.submit.apply ( fn );
-            
-            return false;
-            
-        }, true   );
-        
-        this.object.onsubmit = function ( )
-        {
-            
-            return false;
-            
-        };
-        
-    };
-    
-    this.handleSuccess = function ( r )
-    {
- 
-        if ( this.options.error && this.options.error !== null )
-        {
-            
-            this.options.success.apply ( this );
-            
-        }
-        else
-        {
-        
-            this.validator.show.apply ( this.validator );
-            this.validator.html.apply ( this.validator, [ '<span>Das Formular wurde erfolgreich abgesendet.</span>' ] );
-        
-        }
-
-        
-    };
-    
-    this.handleError = function ( e )
-    {   
-           
-        if ( this.options.error && this.options.error !== null )
-        {
-            
-            this.options.error.apply ( this, [ e ] );
-            
-        }
-        
-        if ( e && e !== null )
-        {
-
-            this.validator.show.apply ( this.validator );
-            this.validator.html.apply ( this.validator, [ '<span>' + e.errorMessage + '</span>' ] );
-        
-        }
-        
-    };
-    
-    //
-    this.init.apply ( this );
-    
 };
 
 /* FormValidator */
@@ -728,7 +460,6 @@ var Tooltip = function ( )
 
         this.visible = true;
         this.object.style.display = 'block';
-        this.object.style.opacity = 1;
 
     };
 
@@ -740,7 +471,6 @@ var Tooltip = function ( )
            
             this.visible = false;
             this.object.style.display = 'none';
-            this.object.style.opacity = 0;
 
         }
 
@@ -751,7 +481,7 @@ var Tooltip = function ( )
 
         this.textContent = t;
 
-        this.textContainer.innerText = this.textContent;
+        this.textContainer.innerHTML = this.textContent;
 
     };
 
