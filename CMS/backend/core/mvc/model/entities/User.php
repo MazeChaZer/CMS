@@ -18,8 +18,17 @@ class User extends Model {
     private $email;
     private $password;
     private $passwordEncrypted = false;
+    private $sessionToken;
 
-    public function setUsername($username)
+    public function getSessionToken() {
+        return $this->sessionToken;
+    }
+
+    public function setSessionToken($sessionToken) {
+        $this->sessionToken = $sessionToken;
+    }
+
+        public function setUsername($username)
     {
         $this->username = $username;
         return 0;
@@ -39,7 +48,7 @@ class User extends Model {
     {
         if($useEncryption)
         {
-            $this->password = hash("sha512", $password.$this->email);
+            $this->password = hash("sha512", $password.$this->userID);
             $this->passwordEncrypted = true;
         }
         else
@@ -64,7 +73,7 @@ class User extends Model {
     {
         if($this->passwordEncrypted)
         {
-            return (hash("sha512", $password.$this->email) == $this->password);
+            return (hash("sha512", $password.$this->userID) == $this->password);
         }
         else
         {
@@ -97,6 +106,7 @@ class User extends Model {
                 $this->email = $result['email'];
                 $this->userID = $result['userID'];
                 $this->passwordEncrypted = $result['passwordEncrypted'];
+                $this->sessionToken = $result['sessiontoken'];
                 return 0;   // User successfully loaded!
             }
             else
@@ -122,6 +132,7 @@ class User extends Model {
                 $this->email = $result['email'];
                 $this->userID = $result['userID'];
                 $this->passwordEncrypted = $result['passwordEncrypted'];
+                $this->sessionToken = $result['sessiontoken'];
                 return 0;   // User successfully loaded!
             }
             else
@@ -137,9 +148,9 @@ class User extends Model {
             $this->userID = $this->getNewID();
             $st = self::$db->prepare(
                 "INSERT INTO user
-                    ( userID, username, email, password, create_time, passwordEncrypted )
+                    ( userID, username, email, password, create_time, passwordEncrypted, sessiontoken )
                  VALUES 
-                    ( :userID, :username, :email, :password, :create_time, :passwordEncrypted )"
+                    ( :userID, :username, :email, :password, :create_time, :passwordEncrypted, :sessiontoken )"
             );
             $st->execute(array(
                 ':userID' => $this->userID,
@@ -147,7 +158,8 @@ class User extends Model {
                 ':email' => $this->email,
                 ':password' => $this->password,
                 ':create_time' => date("Y-m-d H:i:s",time()),
-                ':passwordEncrypted' => $this->passwordEncrypted)
+                ':passwordEncrypted' => $this->passwordEncrypted,
+                ':sessiontoken' => $this->sessionToken)
             );
             return 0;
         }
@@ -159,7 +171,8 @@ class User extends Model {
                         username = :username,
                         email = :email,
                         password = :password,
-                        passwordEncrypted = :passwordEncrypted
+                        passwordEncrypted = :passwordEncrypted,
+                        sessiontoken = :sessiontoken
                      WHERE userID = :userID"
              );
              $st->execute(array(
@@ -167,7 +180,8 @@ class User extends Model {
                 ':username' => $this->username,
                 ':email' => $this->email,
                 ':password' => $this->password,
-                ':passwordEncrypted' => $this->passwordEncrypted)
+                ':passwordEncrypted' => $this->passwordEncrypted,
+                ':sessiontoken' => $this->sessionToken)
              );
              return 0;
         }
@@ -205,6 +219,7 @@ class User extends Model {
                 $this->email = $result['email'];
                 $this->userID = $result['userID'];
                 $this->passwordEncrypted = $result['passwordEncrypted'];
+                $this->sessionToken = $result['sessiontoken'];
                 return 0;   // User successfully loaded!
             }
             else
