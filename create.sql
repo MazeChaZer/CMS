@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `cms`.`user` (
   `password` VARCHAR(512) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `passwordEncrypted` TINYINT(1) NOT NULL DEFAULT 0,
+  `sessiontoken` VARCHAR(16) NULL,
   PRIMARY KEY (`userID`))
 ENGINE = InnoDB;
 
