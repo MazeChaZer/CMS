@@ -30,7 +30,6 @@ class c_register extends controller {
         if(isset($_SESSION['usernamealreadyexists'])){
             $this->view->setData(array('usernamealreadyexists' => True));
             unset($_SESSION['usernamealreadyexists']);
-            echo 'usernamealreadyexists'; //#DEBUG
         }
         $this->view->out();
     }
