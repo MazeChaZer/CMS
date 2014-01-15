@@ -16,6 +16,10 @@ class Data extends Model{
     private $ablageort;
     private $uploaderID;
     
+    public function getDataID() {
+        return $this->dataID;
+    }
+    
     public function getName() {
         return $this->name;
     }
@@ -59,7 +63,7 @@ class Data extends Model{
            ':dataID' => $dataID)
         );
         $result = $st->fetch(PDO::FETCH_ASSOC);
-        if(isSet($result))
+        if(!empty($result))
         {
             $this->dataID = $result['dataID'];
             $this->name = $result['name'];

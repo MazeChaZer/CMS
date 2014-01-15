@@ -22,6 +22,9 @@ class Entry extends Model {
     private $anhangID;
     private $categoryID;
     
+    public function getEntryID() {
+        return $this->entryID;
+    }
 
     public function getAuthorID() {
         return $this->authorID;
@@ -102,7 +105,7 @@ class Entry extends Model {
                ':entryID' => $entryID)
             );
             $result = $st->fetch(PDO::FETCH_ASSOC);
-            if(isSet($result))
+            if(!empty($result))
             {
                 $this->authorID = $result['authorID'];
                 $this->URL = $result['URL'];
