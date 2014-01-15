@@ -7,7 +7,7 @@ require_once('core/mvc/model/entities/User.php');
 class c_rightsControl {
 
     public function construct() {
-        parent::__construct("filemanager");
+        parent::__construct("rightscontrol");
         $this->setIsPublic(FALSE);
     }
 
