@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="out/fontawesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="out/css/main.css" />
         <link rel="stylesheet" href="out/css/acp.css" />
+        <link rel="stylesheet" href="out/css/contents.css" />
     </head>
     <body>
         <div class="cms-acp">
@@ -15,34 +16,47 @@
                     <a class="fa fa-home" tooltip tooltip-text="Frontend" tooltip-direction="bottom" href="<?= URL ?>" target="_blank"></a>  
                     <a class="fa fa-sign-out" tooltip tooltip-text="Logout" tooltip-direction="bottom" href="?page=logout"></a> 
                 </nav>
+                <section>
+                    <hgroup>
+                        <h1>RK CMS</h1>
+                        <h3>V 0.3</h3>
+                    </hgroup>
+                </section>
                 <menu role="menu">
                     <nav role="navigation" role="presentation">
                         <a href="?templates">
-                            <span class="fa fa-desktop"></span>
-                            Menüpunkt1
+                            <figure class="fa fa-desktop">
+                                <figcaption>Menüpunkt1</figcaption>
+                            </figure>
                         </a>
                         <a href="?inhalte">
-                            <span class="fa fa-file-text"></span>
-                            Menüpunk2
+                            <figure class="fa fa-file-text">
+                                <figcaption>Menüpunkt2</figcaption>
+                            </figure>
                         </a>
                         <a href="?module">
-                            <span class="fa fa-puzzle-piece"></span>
-                            Menüpunk3
+                            <figure class="fa fa-puzzle-piece">
+                                <figcaption>Menüpunk3</figcaption>
+                            </figure>
                         </a>
-                        <a href="?dateien">
-                            <span class="fa fa-cloud-upload"></span>
-                            Menüpunk4
+                        <a href="?page=files">
+                            <figure class="fa fa-cloud-upload">
+                                <figcaption>Dateiverwaltung</figcaption>
+                            </figure>
                         </a>
-                        <a href="?einstellungen">
-                            <span class="fa fa-cogs"></span>
-                            Menüpunkt5
+                        <a href="?page=rights">
+                            <figure class="fa fa-dashboard">
+                                <figcaption>Rechteverwaltung</figcaption>
+                            </figure>
                         </a>
                     </nav>
                 </menu>
             </header>
             <section role="main">
                 <section>
-                    Hier muss dann der Inhalt rein
+                    <?php
+                        require 'pages/files.php';
+                    ?>
                 </section>
             </section>
             <footer>

@@ -219,11 +219,6 @@
     width: 2em;
     padding: 1em 1.45em;
     
-    color: rgb( 66, 66, 66 );
-    font-size: .78em;
-    text-shadow: 0 0 1px rgb( 88, 88, 88 );
-    text-align: center;
-    
     background: rgb(238,238,238);
     background: -moz-linear-gradient(top,  rgb(255,255,255) 0%, rgb(224,224,224) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(224,224,224)), color-stop(100%,rgb(204,204,204)));
@@ -261,13 +256,20 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#c1c1c1',GradientType=0 );
 }
 
-*>header>menu[role="menu"]>nav[role="navigation"]>a>span {
+*>header>menu[role="menu"]>nav[role="navigation"]>a>figure {
     color: rgb( 75, 75, 75 );
-    font-size: 2.65em;
+    font-size: 2em;
     text-shadow: 0 0 1px rgba( 44, 44, 44, .5 );
     text-align: center;
     
     display: block;
+}
+
+*>header>menu[role="menu"]>nav[role="navigation"]>a>figure>figcaption { 
+    color: rgb( 66, 66, 66 );
+    font-size: .48em;
+    text-shadow: 0 0 1px rgb( 88, 88, 88 );
+    text-align: center;
 }
 
 *>section[role="main"]>section {
