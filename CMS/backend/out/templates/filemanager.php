@@ -1,25 +1,20 @@
 <?php
 
-$files = array (
-  array (
-      'name' => 'datei.docx',
-      'size' => '9000gb',
-      'created' => '11.11.1111'
-  ),
-  array ( 
-      'name' => 'dennis_dobslaf_nackt.jpg',
-      'size' => '10kb',
-      'created' => 'wann immer dennis es wollte'
-  ),
-  array ( 
-      'name' => 'Jan_niklas_SCHALKE.mp3',
-      'size' => '0b',
-      'created' => 'im Suff'
-  )
-    
-);
+    require 'head.php';
 
+    function getSize($size){
+        if($size / 1024 > 1)
+        {
+            if($size/1024/1024>1)
+            {
+                return round($size/1024/1024,2).' MB';
+            }
+            return round($size/1024,2).' kB';
+        }
+        return $size.' B';
+    }
 ?>
+
 <h2>Meine Dateien</h2>
 <section>
     <section>
@@ -43,6 +38,17 @@ $files = array (
         </menu>
     </section>
     <section>
+        <form action="?page=filemanager" method="post" enctype="multipart/form-data" class="cms-important">
+            <label for="">Datei auswählen:</label>
+            <p>
+                <input type="file" name="cmsdata#file" />
+            </p>
+            <p>
+                <input type="submit" value="Hochladen" />
+            </p>
+        </form>
+    </section>
+    <section>
         <table class="cms-table-styled cms-full">
             <thead>
                 <tr>
@@ -54,12 +60,12 @@ $files = array (
             </thead>
             <tbody>
                 <?php
-                    foreach($files as $f) {
+                    foreach($this->data as $f) {
                         print ( '<tr>' );
                             print ( '<td><input type="checkbox" name="checkbox#" /></td>' );
                             print ( '<td>' . $f[ 'name' ] . '</td>' );
-                            print ( '<td>' . $f[ 'size' ] . '</td>' );
-                            print ( '<td>' . $f[ 'created' ] . '</td>' );
+                            print ( '<td>' . getSize($f[ 'size' ]) . '</td>' );
+                            print ( '<td>' . date('d.m.Y - H:i:s', strtotime($f[ 'created' ])) . '</td>' );
                         print ( '</tr>'); 
                     }
                 ?>
@@ -67,3 +73,9 @@ $files = array (
         </table>
     </section>
 </section>
+
+<?php
+
+    require 'footer.php';
+
+?>
