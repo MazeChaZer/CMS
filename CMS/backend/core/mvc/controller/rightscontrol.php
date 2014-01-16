@@ -4,7 +4,7 @@ namespace ITC\CMS;
 
 require_once('core/mvc/model/entities/User.php');
 
-class c_rightsControl {
+class c_rightsControl extends Controller {
 
     public function construct() {
         parent::__construct("rightscontrol");
@@ -39,8 +39,8 @@ class c_rightsControl {
             for ($i = 1; $i <= count($allRights); $i++) {
                 $rights[$user->getRightName($i)] = $user->checkRight($i);
             }
-
-            return $rights;
+            $this->view->setData($allRights);
+            $this->view->out();
         }
     }
 
