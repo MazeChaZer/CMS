@@ -16,6 +16,29 @@ class Data extends Model {
     private $name;
     private $hash;
     private $uploaderID;
+    private $created;
+    private $size;
+    private $type;
+
+    public function getType() {
+        return $this->type;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+    }
+    
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getSize() {
+        return $this->size;
+    }
+
+    public function setSize($size) {
+        $this->size = $size;
+    }
 
     public function getDataID() {
         return $this->dataID;
@@ -26,7 +49,7 @@ class Data extends Model {
     }
 
     public function getHash() {
-        return $this->$hash;
+        return $this->hash;
     }
 
     public function setName($name) {
@@ -62,6 +85,9 @@ class Data extends Model {
             $this->name = $result['name'];
             $this->hash = $result['hash'];
             $this->uploaderID = $result['uploaderID'];
+            $this->size = $result['size'];
+            $this->created = $result['created'];
+            $this->type =$result['type'];
             return 0;   // Data successfully loaded!
         } else {
             return 1; // Data not found!
@@ -74,31 +100,29 @@ class Data extends Model {
             $this->hash = uniqid('', true);
             $st = self::$db->prepare(
                     "INSERT INTO uploadedData
-                    ( dataID, name, ablageort, uploaderID )
+                    ( dataID, name, hash, uploaderID, size, type )
                  VALUES 
-                    ( :dataID, :name, :ablageort, :uploaderID )"
+                    ( :dataID, :name, :hash, :uploaderID, :size, :type )"
             );
             $st->execute(array(
                 ':dataID' => $this->dataID,
                 ':name' => $this->name,
                 ':hash' => $this->hash,
-                ':uploaderID' => $this->uploaderID)
+                ':uploaderID' => $this->uploaderID,
+                ':size' => $this->size,
+                ':type' => $this->type)
             );
             return 0;
         } else {
             $st = self::$db->prepare(
                     "UPDATE uploadedData
                     SET  
-                        name = :name,
-                        hash = :hash,
-                        uploaderID = :uploaderID,
+                        name = :name
                      WHERE dataID = :dataID"
             );
             $st->execute(array(
                 ':dataID' => $this->dataID,
-                ':name' => $this->name,
-                ':hash' => $this->hash,
-                ':uploaderID' => $this->uploaderID)
+                ':name' => $this->name)
             );
             return 0;
         }
