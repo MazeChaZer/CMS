@@ -4,16 +4,16 @@ namespace ITC\CMS;
 
 require_once('core/mvc/model/entities/User.php');
 
-class c_rightsControl {
+class c_rightsControl extends controller {
 
-    public function construct() {
+    public function __construct() {
         parent::__construct("rightscontrol");
         $this->setIsPublic(FALSE);
     }
 
     public function start() {
-        $isUsernameSet = isset($_POST["username"]);
-        $isEmailSet = isset($_POST["email"]);
+        $isUsernameSet = isset($_GET["username"]);
+        $isEmailSet = isset($_GET["email"]);
         $isApplyRightIDSet = isset($_POST["rightID"]);
         $isRightValueSet = isset($_POST["rightValue"]);
 
@@ -21,27 +21,29 @@ class c_rightsControl {
             $user = new User();
 
             if ($isUsernameSet) {
-                if ($user->loadByUsername($_POST["username"]) != 0) {
-                    return;
-                }
+                $user->loadByUsername($_GET["username"]);
             } else {
-                if ($user->loadByEmail($_POST["email"]) != 0) {
-                    return;
-                }
+                $user->loadByEmail($_GET["email"]);
             }
-
             if ($isRightValueSet && $isApplyRightIDSet) {
                 $user->setRight($_POST["rightId"], $_POST["rightValue"]);
             }
 
             $allRights = $user->getRights();
-
-            for ($i = 1; $i <= count($allRights); $i++) {
-                $rights[$user->getRightName($i)] = $user->checkRight($i);
+            $result = array();
+            for ($i = 0; $i < count($allRights); $i++) {
+                $result[$i] = array(
+                    'id' => $allRights[$i],
+                    'bezeichnung' => $user->getRightName($allRights[$i]),
+                    'wert' => $user->checkRight($allRights[$i])
+                );
             }
+            $result['user'] = $user->getUsername();
 
-            return $rights;
+            $this->view->setData($result);
         }
+
+        $this->view->out();
     }
 
 }

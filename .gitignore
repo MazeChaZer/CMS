@@ -219,3 +219,4 @@ pip-log.txt
 #############
 
 CMS/backend/core/init/settings.php
+/CMS/nbproject/private/

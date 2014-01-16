@@ -114,11 +114,14 @@ class Model
     
     public static function getData()
     {
+        
+        
+            
         $st = self::$db->prepare(
                "SELECT * FROM uploadedData"
             ); 
         $st->execute();
-        return $st->fetchAll(PDO::FETCH_CLASS, "ITC\CMS\Data"); 
+        return $st->fetchAll(PDO::FETCH_ASSOC); 
     }
 
 }
