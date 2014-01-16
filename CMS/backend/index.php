@@ -1,8 +1,7 @@
 <?php
 
-// namespace ITC\CMS;
-
 require_once('core/init/init.php');
+require_once('core/mvc/model/entities/User.php');
 
 if(empty($_GET['page'])){
     $_GET['page'] = 'home';
@@ -19,10 +18,26 @@ require_once($controllerPath);
 $classname = "ITC\\CMS\\c_".$_GET['page'];
 $controller = new $classname();
 
-
+$authFailed = FALSE;
 if(!isset($_SESSION['user']) && !$controller->getIsPublic()) {
-  header('Location: '.BACKENDURL.'index.php?page=login');
-  die;
+    if(isset($_COOKIE['userid']) && isset($_COOKIE['logintoken'])){
+        $user = new ITC\CMS\User();
+        if($user->load($_COOKIE['userid']) == 0){
+            if($user->getSessionToken() == $_COOKIE['logintoken']) {
+                $_SESSION['user'] = $_COOKIE['userid'];
+            } else {
+                $authFailed = TRUE;
+            }
+        } else {
+            $authFailed = TRUE;
+        }
+    } else {
+        $authFailed = TRUE;
+    }
+}
+if($authFailed){
+    header('Location: '.BACKENDURL.'index.php?page=login');
+    die();
 }
 $controller->start();
  

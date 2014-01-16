@@ -17,6 +17,17 @@ class c_login extends controller {
             if($user->loadByUsername($_POST['cms-logindata#username']) == 0){
                 if($user->checkPassword($_POST['cms-logindata#password'])){
                     $_SESSION['user'] = $user->getUserID();
+                    if($_POST['cms-logindata#keepsession'] == "on"){
+                        $alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        $token = "";
+                        for($i = 0; $i < 16; $i++){
+                            $token .= $alphabet[rand(0, strlen($alphabet) - 1)];
+                        }
+                        $user->setSessionToken($token);
+                        $user->save();
+                        setcookie("userid", $user->getUserID(), time()+60*60*24*14);
+                        setcookie("logintoken", $token, time()+60*60*24*14);
+                    }
                     header('Location: '.BACKENDURL.'index.php?page=home');
                     die();
                 } else {
