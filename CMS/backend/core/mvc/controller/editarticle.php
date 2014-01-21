@@ -14,8 +14,7 @@ class c_editarticle extends controller {
     
     public function start(){
         if(empty($_GET['id'])){
-            header('Location: '.BACKENDURL.'index.php?page=listarticles');
-            die();
+            die("Eintrag existiert nicht.");
         }
         $entry = new Entry();
         if($entry->load($_GET['id']) == 1){
