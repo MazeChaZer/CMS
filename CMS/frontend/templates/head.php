@@ -3,9 +3,9 @@
   <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="generator" content="PSPad editor, www.pspad.com">
-  <title> RK Test 7</title>
-  <link rel="stylesheet" href="frontend/css/design.css" />
-  <script src="frontend/js/design.js"></script>
+  <title><?php echo $data['title']; ?></title>
+  <link rel="stylesheet" href="<?php echo URL; ?>frontend/css/design.css" />
+  <script src="<?php echo URL; ?>frontend/js/design.js"></script>
   </head>
   <body onload="NavigationInit(0)">
    <div class="theme">
@@ -30,23 +30,23 @@
         <table class="DesignAuswahl" id="DesignAuswahl">
          <tr>
           <td> 
-           <p onmouseover="DesignChange(0,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(0,2)" class="selected"> <img src="frontend/img/designs/abstrakt_sub.png"> Abstrakt </p>
-           <p onmouseover="DesignChange(1,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(1,2)"> <img src="frontend/img/designs/baum_sub.png"> Baum </p>
-           <p onmouseover="DesignChange(2,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(2,2)"> <img src="frontend/img/designs/palme_sub.png"> Palme </p>
+           <p onmouseover="DesignChange(0,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(0,2)" class="selected"> <img src="<?php echo URL; ?>frontend/img/designs/abstrakt_sub.png"> Abstrakt </p>
+           <p onmouseover="DesignChange(1,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(1,2)"> <img src="<?php echo URL; ?>frontend/img/designs/baum_sub.png"> Baum </p>
+           <p onmouseover="DesignChange(2,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(2,2)"> <img src="<?php echo URL; ?>frontend/img/designs/palme_sub.png"> Palme </p>
           </td>
          </tr>
          <tr>
           <td>
-           <p onmouseover="DesignChange(3,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(3,2)"> <img src="frontend/img/designs/meer_sub.png"> Meer </p>
-           <p onmouseover="DesignChange(4,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(4,2)"> <img src="frontend/img/designs/gras_sub.png"> Gras </p>
-           <p onmouseover="DesignChange(5,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(5,2)"> <img src="frontend/img/designs/blume_sub.png"> Blume </p>
+           <p onmouseover="DesignChange(3,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(3,2)"> <img src="<?php echo URL; ?>frontend/img/designs/meer_sub.png"> Meer </p>
+           <p onmouseover="DesignChange(4,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(4,2)"> <img src="<?php echo URL; ?>frontend/img/designs/gras_sub.png"> Gras </p>
+           <p onmouseover="DesignChange(5,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(5,2)"> <img src="<?php echo URL; ?>frontend/img/designs/blume_sub.png"> Blume </p>
           </td>
          </tr>
          <tr>
           <td>
-           <p onmouseover="DesignChange(6,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(6,2)"> <img src="frontend/img/designs/bambus_sub.png"> Bambus </p>
-           <p onmouseover="DesignChange(7,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(7,2)"> <img src="frontend/img/designs/stadt_sub.png"> Stadt </p>
-           <p onmouseover="DesignChange(8,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(8,2)"> <img src="frontend/img/designs/aurora_sub.png"> Arurora </p>
+           <p onmouseover="DesignChange(6,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(6,2)"> <img src="<?php echo URL; ?>frontend/img/designs/bambus_sub.png"> Bambus </p>
+           <p onmouseover="DesignChange(7,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(7,2)"> <img src="<?php echo URL; ?>frontend/img/designs/stadt_sub.png"> Stadt </p>
+           <p onmouseover="DesignChange(8,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(8,2)"> <img src="<?php echo URL; ?>frontend/img/designs/aurora_sub.png"> Arurora </p>
 
           </td>
          </tr>

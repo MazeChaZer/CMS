@@ -1,6 +1,3 @@
-Hier kommt mal das Frontend hin.
-<pre><?php print_r($_GET); ?></pre>
-
 <?php
 
 require_once('backend/core/init/settings.php');
@@ -10,8 +7,10 @@ $st = $db->prepare("SELECT * FROM entries WHERE URL=:URL;");
 $st->execute(array(":URL" => $_GET['request']));
 $result = $st->fetch(PDO::FETCH_ASSOC);
 if(!empty($result)){
+    $data['title'] = $result['titel'];
+    require_once 'frontend/templates/head.php';
     echo $result['inhalt'];
-    echo '<title>' . $result['titel'] . '</title>';
+    require_once 'frontend/templates/footer.php';
 } else {
     header("HTTP/1.0 404 Not Found");
     die("Diese Seite existiert nicht.");

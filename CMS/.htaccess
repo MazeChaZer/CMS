@@ -1,4 +1,5 @@
 # CMS .htaccess
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !/backend/.*
+RewriteCond %{REQUEST_FILENAME} !/frontend/.*
 RewriteRule ^(.*)$ index.php?request=$1 [QSA]
