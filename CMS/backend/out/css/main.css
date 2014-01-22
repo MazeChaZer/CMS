@@ -158,6 +158,9 @@ html>body {
     font-weight: bold;
 }
 
+*>*.cms-disabled {
+    opacity: .4;
+}
 /* styling */
 *>*.cms-important {
     border-width: 1px;

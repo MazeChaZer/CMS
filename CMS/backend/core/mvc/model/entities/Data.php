@@ -74,7 +74,7 @@ class Data extends Model {
     public function load($dataID) {
         $st = self::$db->prepare(
                 "SELECT * FROM uploadedData
-               WHERE dataID = :dataID"
+                 WHERE dataID = :dataID"
         );
         $st->execute(array(
             ':dataID' => $dataID)
@@ -138,7 +138,7 @@ class Data extends Model {
                 ':dataID' => $this->dataID)
             );
 
-            //unlink("files/".$this->dataID)
+            unlink("files/".$this->hash);
         }
         return 0;
     }

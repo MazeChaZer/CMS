@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="out/css/contents.css" />
     </head>
     <body>
+        <script src="out/js/objects.js"></script>
         <div class="cms-acp">
             <header>
                 <nav>
@@ -29,16 +30,16 @@
                                 <figcaption>Menüpunkt1</figcaption>
                             </figure>
                         </a>
-                        <a href="?inhalte">
+                        <a href="?page=editarticle">
                             <figure class="fa fa-file-text">
-                                <figcaption>Menüpunkt2</figcaption>
+                                <figcaption>Artikelverwaltung</figcaption>
                             </figure>
                         </a>
-                        <a href="?module">
+<!--                        <a href="?module">
                             <figure class="fa fa-puzzle-piece">
                                 <figcaption>Menüpunk3</figcaption>
                             </figure>
-                        </a>
+                        </a>-->
                         <a href="?page=filemanager">
                             <figure class="fa fa-cloud-upload">
                                 <figcaption>Dateiverwaltung</figcaption>

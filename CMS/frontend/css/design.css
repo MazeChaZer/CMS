@@ -1,0 +1,310 @@
+body{
+font-family:arial; }
+
+div.theme{
+width:100%;
+display:block;
+position:absolute;
+top:0px;
+left:0px; }
+
+div.theme div.bild{
+height:426px;
+width:100%;
+background:url(../img/designs/abstrakt.jpg) #000;
+background-repeat:no-repeat;
+background-position:center bottom;
+position:absolute;
+top:0px;
+left:0px;
+border-bottom:1px ridge #efefef; }
+
+div.theme div.leiste{
+width:100%;
+height:128px;
+background:url(../img/kopf/leiste.png);
+background-repeat:repeat-x;
+position:absolute;
+top:100px;
+left:0px;
+text-align:center;
+font-family:Latha; }
+
+div.theme div.leiste div.inner{
+width:1000px;
+margin:auto auto; }
+
+div.theme div.leiste div.inner img.logo{
+width:156px;
+height:156px;
+margin-top:-20px;
+float:left; }
+
+div.theme div.leiste div.inner a{
+float:left;
+display:block;
+padding:14px;
+margin:25px 10px 0px 10px;
+text-align:center;
+color:#666;
+height:50px;
+display:block;
+text-decoration:none;
+font-size:22px;
+cursor:pointer; }
+
+div.theme div.leiste div.inner a:hover{
+color:#333; }
+
+div.theme div.leiste div.inner a.sub{
+color:#666;
+background:url(../img/kopf/bg_1.png);
+background-repeat:no-repeat;
+background-position:bottom center; }
+
+div.theme div.leiste div.inner a.sub:hover{
+color:#333;
+background:url(../img/kopf/bg_2.png);
+background-repeat:no-repeat;
+background-position:bottom center; }
+
+div.theme div.subs{
+position:absolute;
+top:200px;
+left:0px;
+width:100%; }
+
+div.theme div.subs div{
+position:absolute;
+z-index:10;
+top:16px;
+background:#fff;
+overflow:hidden;
+text-align:justify;
+padding:10px 6px 12px 6px;
+min-width:14%;
+max-width:600px;
+display:none;
+color:#555;
+font-size:12px;
+border:2px solid #999;
+-moz-box-shadow: 5px 5px 5px #333; }
+
+div.theme div.subs b{
+text-shadow: 3px 3px 3px #ccc; }
+
+div.theme div.subs div ol{
+list-style-type:none;
+margin:10px 0 2px 0px;
+padding:0px; }
+
+div.theme div.subs div ol li{
+margin:4px 0px 2px 0px; }
+
+div.theme div.inhalt{
+position:absolute;
+left:0px;
+z-index:0;
+top:228px;
+width:100%;
+height:200px;
+text-align:right;
+color:#fff; }
+
+div.theme div.inhalt div{
+float:right;
+width:200px;
+text-align:right; }
+
+div.theme div.inhalt div h2{
+float:left;
+margin-left:10px;
+width:180px;
+display:inline;
+letter-spacing:3px; }
+
+div.theme div.inhalt div b{
+margin-right:20px; }
+
+div.theme div.inhalt img.logo{
+float:right; }
+
+div.theme div.textkoerper table{
+position:absolute;
+left:50%;
+top:430px;
+width:1000px;
+margin-left:-500px;
+border-collapse:collapse;
+color:#444;
+font-size:18px;
+font-family:times new roman; }
+
+div.theme div.textkoerper table tr td{
+padding:10px; }
+
+div.theme div.textkoerper table tr td.text{
+width:940px;
+padding-top:40px;
+text-align:justify; }
+
+div.theme div.textkoerper table tr td.text img.flow1{
+float:left;
+border:1px dashed #dfdfdf;
+margin:10px; }
+
+div.theme div.textkoerper table tr td.text img.flow2{
+float:right;
+border:1px dashed #dfdfdf;
+margin:10px; }
+
+div.theme div.textkoerper table tr td.SubNavigation{
+text-align:left;
+border-left:1px solid #ccc;
+vertical-align:top;
+padding-top:40px; }
+
+div.theme div.textkoerper table tr td.SubNavigation ol{
+list-style-type:disc; }
+
+div.theme div.textkoerper table tr td.SubNavigation ol li a{
+color:#444;
+text-decoration:none; }
+
+div.theme div.textkoerper table tr td.SubNavigation ol li a:hover{
+text-decoration:underline; }
+
+div.theme #subbar{
+position:fixed;
+bottom:0px;
+left:0px;
+width:100%; }
+
+div.theme #subbar.geschlossen{
+height:20px;
+background:url(../img/fuss/subbar/geschlossen.png);
+background-repeat:repeat-x;
+background-position:left bottom;
+text-align:center;
+cursor:pointer; }
+
+div.theme #subbar.offen{
+border-top:1px solid #ccc;
+background:url(../img/fuss/subbar/pfeil_runter.png) #efefef;
+background-repeat:no-repeat;
+background-position:top center;
+height:100px;
+display:block; }
+
+div.theme #subbar.offen div{
+height:180px;
+display:block; }
+
+div.theme #subbar.offen div.subbar_content{
+text-align:center;
+width:100%;
+overflow:hidden;
+display:block; }
+
+div.theme #subbar.offen div.subbar_content table{
+width:100%;
+border-collapse:collapse;
+padding:0px; }
+
+div.theme #subbar.offen div.subbar_content table tr td{
+vertical-align:top; }
+
+div.theme #subbar.offen div.subbar_content table tr #slide_knopf.links{
+background:url(../img/fuss/subbar/slide_l.png);
+background-repeat:no-repeat;
+background-position:center center;
+width:54px;
+height:80px;
+float:left;
+cursor:pointer; }
+
+div.theme #subbar.offen div.subbar_content table tr #slide_knopf.links:hover{
+background:url(../img/fuss/subbar/slide_l-hover.png);
+background-repeat:no-repeat;
+background-position:center center; }
+
+div.theme #subbar.offen div.subbar_content table tr #slide_knopf.rechts{
+background:url(../img/fuss/subbar/slide_r.png);
+background-repeat:no-repeat;
+background-position:center center;
+width:84px;
+height:80px;
+float:left;
+cursor:pointer; }
+
+div.theme #subbar.offen div.subbar_content table tr #slide_knopf.rechts:hover{
+background:url(../img/fuss/subbar/slide_r-hover.png);
+background-repeat:no-repeat;
+background-position:center center; }
+
+div.theme #subbar.offen div.subbar_content table tr #slide{
+text-align:center;
+overflow:hidden; }
+
+div.theme #subbar.offen div.subbar_content #slide div{
+position:relative;
+right:0px;
+top:0px; }
+
+div.theme #subbar.offen div.subbar_content #slide div img{
+float:left;
+width:220px;
+height:100px;
+background:url(../img/fuss/subbar/knopf.png);
+background-position:top center;
+display:block;
+margin-top:-10px;
+opacity:0.7;
+filter:alpha(opacity=70); }
+
+div.theme #subbar.offen div.subbar_content #slide div img:hover{
+opacity:1.0;
+cursor:pointer; 
+filter:alpha(opacity=100); }
+
+div.theme #subbar div.schliessen{
+height:30px;
+margin-top:-20px;
+display:block;
+cursor:pointer; }
+
+div.theme #subbar.offen img.schalter, div.theme #subbar.gescglossen div.subbar_content{
+display:none; }
+
+table.DesignAuswahl{
+border-collapse:collapse;
+padding:2px;
+margin:3px;  }
+
+table.DesignAuswahl tr td{
+font-size:14px;
+color:#555;
+font-weight:bold;
+padding:3px; }
+
+table.DesignAuswahl tr td p{
+padding:2px;
+float:left;
+width:120px;
+margin:2px;  }
+
+table.DesignAuswahl tr td p.selected{
+border:1px solid #aaaaca;
+padding:1px;
+background:#eeeefe; }
+
+table.DesignAuswahl tr td p:hover{
+border:1px solid #9999a9;
+padding:1px;
+background:#ddddfd;
+cursor:pointer; }
+
+table.DesignAuswahl tr td p img{
+padding:4px;
+vertical-align:middle;
+vertical-align: middle; }

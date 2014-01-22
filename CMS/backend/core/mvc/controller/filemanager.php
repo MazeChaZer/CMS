@@ -12,27 +12,29 @@ class c_filemanager extends Controller {
     }
 
     public function start() {
-
-        if (isset($_POST["deletefileids"])) {
-            $deletefileid = $_POST("deletefileids");
-
-            for ($i = 0; $i < count($deletefileid); $i++) {
-                $file = new Data();
-                $file->load($deletefileid[$i]);
-                $file->delete();
-            }
+        if (isset($_POST["cmsfilesdata"])) {
+           foreach($_POST["cmsfilesdata"] as $id => $key)
+           {
+               $file = new Data();
+               $file->load($id);
+               $file->delete();
+           }
         }
 
-        if (isset($_POST["renamefiles"])) {
-            $renamefiles = $_POST("renamefiles");
-            foreach ($renamefiles as $fileid => $newName) {
-                $file = new Data();
-                $file->load($fileid);
-                $file->setName($newName);
-            }
+        if (isset($_POST["renameid"])) {
+            $fileid = $_POST["renameid"];
+            $newName = $_POST["cmsdata#file"];
+            
+            $file = new Data();
+            $file->load($fileid);
+            $file->setName($newName);
+            $file->save();
+            
+            header('Location: '.BACKENDURL.'index.php?page=filemanager');
+            die();
         }
 
-        if (isset($_FILES["cmsdata#file"]["name"])) {
+        if (isset($_FILES["cmsdata#file"])) {
             $filename = $_FILES["cmsdata#file"]["name"];
             $data = new Data();
             $data->setName($filename);
