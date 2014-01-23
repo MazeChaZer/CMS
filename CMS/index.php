@@ -13,7 +13,8 @@ if(!empty($result)){
     require_once 'frontend/templates/footer.php';
 } else {
     header("HTTP/1.0 404 Not Found");
-    die("Diese Seite existiert nicht.");
+    require_once('frontend/templates/404.php');
+    die();
 }
 
 ?>
