@@ -13,8 +13,18 @@ class c_editarticle extends controller {
     }
     
     public function start(){
+        if(isset($_POST['titel'])){
+//             print_r($_POST);
+            $entry = new Entry();
+            $entry->load($_GET['id']);
+            $entry->setTitel($_POST['titel']);
+            $entry->setInhalt($_POST['artikel']);
+            $entry->save();
+            header('Location: '.BACKENDURL.'index.php?page=editarticle&id=' . $_GET['id']);
+            die();
+        }
         if(empty($_GET['id'])){
-            die("Eintrag existiert nicht.");
+            $this->view->setData(array("new" => TRUE));
         }
         $entry = new Entry();
         if($entry->load($_GET['id']) == 1){
@@ -49,7 +59,7 @@ class c_editarticle extends controller {
         }
         
         
-        $articledata = array(   "entryId" => $entry->getEntryID(),
+        $articledata = array(   "entryID" => $entry->getEntryID(),
                                 "author" => array(  "username" => $author->getUsername(),
                                                     "email" => $author->getEmail()
                                                  ),

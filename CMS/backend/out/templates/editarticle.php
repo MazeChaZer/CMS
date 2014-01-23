@@ -28,14 +28,19 @@
 ?>
         <section>
             <section>
+            <form action="<?php echo BACKENDURL; ?>index.php?page=editarticle&amp;id=<?php echo $this->data['articledata']['entryID']; ?>" method="POST">
                 <p>
                     <label>Artikelname</label>
-                    <input type="text" class="cms-input-text" maxlength="32" pattern="^[_.A-Za-z0-9]$"/>
+                    <input type="text" name="titel" class="cms-input-text" maxlength="32" value="<?php echo $this->data['articledata']['titel']; ?>" />
                 </p>
                 <p>
                     <label>Artikelinhalt</label>
-                    <textarea name="artikel"></textarea>
+                    <textarea name="artikel"><?php echo $this->data['articledata']['inhalt']; ?></textarea>
                 </p>
+                <p>
+                    <button type="submit">Speichern</button>
+                </p>
+            </form>
             </section>
         </section>
         <script src="out/plugins/ckeditor/ckeditor.js"></script>
