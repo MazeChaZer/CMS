@@ -87,6 +87,10 @@ class Entry extends Model {
         $this->categoryID = $categoryID;
     }
     
+    public function setAuthorID($authorID) {
+        $this->authorID = $authorID;
+    }
+    
     private function getNewID()
     {
         $SQL = "SELECT MAX(entryID) AS maxID FROM entries;";
