@@ -23,6 +23,7 @@ class c_editarticle extends controller {
             }
             $entry->setTitel($_POST['titel']);
             $entry->setInhalt($_POST['artikel']);
+            $entry->setAnhangID($_POST['anhang']);
             $entry->save();
             header('Location: '.BACKENDURL.'index.php?page=editarticle&id=' . $entry->getEntryID());
             die();
