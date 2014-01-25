@@ -48,22 +48,6 @@ class c_editarticle extends controller {
                 $editorArray = array();
             }
             
-            $attachment = new Data();
-            if($attachment->load($entry->getAnhangID()) == 0){
-                $uploader = new User();
-                $uploader->load($attachment->getUploaderID());
-                                        
-                $attachmentArray = array(   "dataID" => $attachment->getDataID(),
-                                            "name" => $attachment->getName(),
-                                            "uploader" => array("username" => $uploader->getUsername(),
-                                                                "email" => $uploader->getEmail()
-                                                              )
-                                        );
-            } else {
-                $attachmentArray = array();
-            }
-            
-            
             $articledata = array(   "entryID" => $entry->getEntryID(),
                                     "author" => array(  "username" => $author->getUsername(),
                                                         "email" => $author->getEmail()
@@ -74,9 +58,10 @@ class c_editarticle extends controller {
                                     "inhalt" => $entry->getInhalt(),
                                     "dateEdited" => $entry->getDateEdited(),
                                     "editor" => $editorArray,
-                                    "attachment" => $attachmentArray,
+                                    "attachment" => $entry->getAnhangID(),
                                     "category" => "<Entity fehlt noch>");
-            $this->view->setData(array("articledata" => $articledata));
+            $this->view->setData(array( "articledata" => $articledata,
+                                        "uploads" => Model::getData()));
         }
         $this->view->out();
     }
