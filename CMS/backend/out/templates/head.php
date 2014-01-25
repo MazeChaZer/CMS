@@ -19,17 +19,12 @@
                 </nav>
                 <section>
                     <hgroup>
-                        <h1>RK CMS</h1>
+                        <h1>CMS</h1>
                         <h3>V 0.3</h3>
                     </hgroup>
                 </section>
                 <menu role="menu">
                     <nav role="navigation" role="presentation">
-                        <a href="?templates">
-                            <figure class="fa fa-desktop">
-                                <figcaption>Menüpunkt1</figcaption>
-                            </figure>
-                        </a>
                         <a href="?page=editarticle">
                             <figure class="fa fa-file-text">
                                 <figcaption>Artikelverwaltung</figcaption>

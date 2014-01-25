@@ -27,8 +27,18 @@
 //     {
 ?>
         <section>
+            <?php
+                if(isset($this->data['new']))
+                {
+                    print('<h3>Neuen Artikel erstellen</h3>');
+                }
+                else
+                {
+                    print('<h3>Artikel bearbeiten</h3>');
+                }
+            ?>
             <section>
-            <form action="<?php echo BACKENDURL; ?>index.php?page=editarticle<?php if(!$this->data["new"]){ ?>&amp;id=<?php echo $this->data['articledata']['entryID']; ?><?php } ?>" method="POST">
+            <form method="post" action="<?php echo BACKENDURL; ?>index.php?page=editarticle<?php if( !isset($this->data["new"])){ ?>&amp;id=<?php echo $this->data['articledata']['entryID']; ?><?php } ?>">
                 <p>
                     <label>Artikelname</label>
                     <input type="text" name="titel" class="cms-input-text" maxlength="32" value="<?php echo $this->data['articledata']['titel']; ?>" />
@@ -37,6 +47,9 @@
                     <label>Artikelinhalt</label>
                     <textarea name="artikel"><?php echo $this->data['articledata']['inhalt']; ?></textarea>
                 </p>
+                <p class="cms-important">
+                    <span>Dateien mit diesem Artikel verknpüfen</span>
+                </p>
                 <p>
                     <button type="submit">Speichern</button>
                 </p>
@@ -44,6 +57,9 @@
             </section>
         </section>
         <script src="out/plugins/ckeditor/ckeditor.js"></script>
-<?php
+        <script>
+            CKEDITOR.replace('artikel');
+        </script>
+            <?php
 //     }
     require 'footer.php';
