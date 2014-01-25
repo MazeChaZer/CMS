@@ -10,7 +10,7 @@ class c_filemanager extends Controller {
         parent::__construct("filemanager");
         $this->setIsPublic(FALSE);
     }
-
+    
     public function start() {
         if (isset($_POST["cmsfilesdata"])) {
            foreach($_POST["cmsfilesdata"] as $id => $key)
