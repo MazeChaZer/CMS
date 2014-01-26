@@ -13,12 +13,15 @@ class c_filemanager extends Controller {
     
     public function start() {
         if (isset($_POST["cmsfilesdata"])) {
-           foreach($_POST["cmsfilesdata"] as $id => $key)
-           {
-               $file = new Data();
-               $file->load($id);
-               $file->delete();
-           }
+            foreach($_POST["cmsfilesdata"] as $id => $key)
+            {
+                $file = new Data();
+                $file->load($id);
+                $file->delete();
+            }
+            
+            header('Location: '.BACKENDURL.'index.php?page=filemanager');
+            die();
         }
 
         if (isset($_POST["renameid"])) {

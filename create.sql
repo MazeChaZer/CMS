@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 26. Jan 2014 um 18:28
+-- Erstellungszeit: 26. Jan 2014 um 18:41
 -- Server Version: 5.6.14
 -- PHP-Version: 5.5.6
 
@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `uploadedData` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hash` varchar(45) DEFAULT NULL,
   `uploaderID` int(11) DEFAULT NULL,
+  `type` varchar(20) NOT NULL,
   PRIMARY KEY (`dataID`),
   KEY `uploaderID_idx` (`uploaderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
