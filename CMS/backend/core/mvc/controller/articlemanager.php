@@ -31,10 +31,8 @@ class c_articlemanager extends Controller {
             header('Location: ' . BACKENDURL . 'index.php?page=articlemanager');
             die();
         }
-
-        $allArticles = new Entry();
-        //getArticles
-        $this->view->setData($allArticles);
+        new Model(); //q+d
+        $this->view->setData(array("articles" => Model::getEntries()));
         $this->view->out();
     }
 

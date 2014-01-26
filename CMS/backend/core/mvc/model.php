@@ -123,5 +123,12 @@ class Model
         $st->execute();
         return $st->fetchAll(PDO::FETCH_ASSOC); 
     }
+    
+    public static function getEntries()
+    {
+        $st = self::$db->prepare("SELECT * FROM entries");
+        $st->execute();
+        return $st->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
