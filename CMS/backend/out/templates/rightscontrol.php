@@ -15,25 +15,12 @@ if ( empty($this->data['user']) )
         <ul class="cms-list">
             <h3>Benutzer</h3>
             <?php
-                foreach ( $user as $u )
+          
+                foreach ( $this->data['users'] as $u )
                 {
-
+          
                     print ( '<li class="cms-list-point cms-text-center cms-margin">' );
-                    print ( '<a href="?page=rightscontrol&username=adminadmin" class="cms-list-text">' . $u . '</a>' );
-                    print ( '</li>' );
-
-                }
-            ?>
-        </ul>
-    </section>
-    <section class="cms-table-cell cms-half cms-padding">
-        <ul class="cms-list">
-            <h3>Benutzergruppen</h3>
-            <?php
-                foreach ( $usergroups as $ug )
-                {
-                    print ( '<li class="cms-list-point cms-text-center cms-margin">' );
-                    print ( '<a href="?id=Jönas" class="cms-list-text">' . $ug . '</a>' );
+                    printf ( '<a href="?page=rightscontrol&username=%s" class="cms-list-text">%s</a>', $u[ 'username'], $u['username'] );
                     print ( '</li>' );
 
                 }
