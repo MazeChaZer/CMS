@@ -21,6 +21,8 @@ class Entry extends Model {
     private $editorID;
     private $anhangID;
     private $categoryID;
+    private $locked;
+    private $lockedBy;
     
     public function getEntryID() {
         return $this->entryID;
@@ -62,6 +64,13 @@ class Entry extends Model {
         return $this->categoryID;
     }
 
+    public function getLocked() {
+        return $this->locked;
+    }
+    
+    public function getLockedBy() {
+        return $this->lockedBy;
+    }
 
     public function setURL($URL) {
         $this->URL = $URL;
@@ -91,6 +100,14 @@ class Entry extends Model {
         $this->authorID = $authorID;
     }
     
+    public function setLocked($locked) {
+        $this->locked = $locked;
+    }
+    
+    public function setLockedBy($lockedBy) {
+        $this->lockedBy = $lockedBy;
+    }
+    
     private function getNewID()
     {
         $SQL = "SELECT MAX(entryID) AS maxID FROM entries;";
@@ -108,6 +125,7 @@ class Entry extends Model {
             $st->execute(array(
                ':entryID' => $entryID)
             );
+            
             $result = $st->fetch(PDO::FETCH_ASSOC);
             if(!empty($result))
             {
@@ -120,6 +138,8 @@ class Entry extends Model {
                 $this->editorID = $result['editorID'];
                 $this->anhangID = $result['anhangID'];
                 $this->categoryID = $result['categoryID'];
+                $this->locked = $result['locked'];
+                $this->lockedBy = $result['lockedBy'];
                 $this->entryID = $result['entryID'];
                 return 0;   // Entry successfully loaded!
             }
@@ -136,9 +156,9 @@ class Entry extends Model {
             $this->entryID = $this->getNewID();
             $st = self::$db->prepare(
                 "INSERT INTO entries
-                    ( entryID, authorID, URL, dateCreated, titel, inhalt, dateEdited, editorID, anhangID, categoryID)
+                    ( entryID, authorID, URL, dateCreated, titel, inhalt, dateEdited, editorID, anhangID, categoryID, locked, lockedBy)
                  VALUES 
-                    ( :entryID, :authorID, :URL, :dateCreated, :titel, :inhalt, :dateEdited, :editorID, :anhangID, :categoryID )"
+                    ( :entryID, :authorID, :URL, :dateCreated, :titel, :inhalt, :dateEdited, :editorID, :anhangID, :categoryID, :locked, :lockedBy )"
             );
             $st->execute(array(
                 ':entryID' => $this->entryID,
@@ -150,7 +170,9 @@ class Entry extends Model {
                 ':dateEdited' => NULL,
                 ':editorID' => NULL,
                 ':anhangID' => $this->anhangID,
-                ':categoryID' => $this->categoryID)
+                ':categoryID' => $this->categoryID,
+                ':locked' => $this->locked,
+                ':lockedBy' => $this->lockedBy)
             );
             return 0;
         }
@@ -165,7 +187,9 @@ class Entry extends Model {
                         dateEdited = :dateEdited,
                         editorID = :editorID,
                         anhangID = :anhangID,
-                        categoryID = :categoryID
+                        categoryID = :categoryID,
+                        locked = :locked,
+                        lockedBy = :lockedBy
                      WHERE entryID = :entryID"
              );
             $st->execute(array(
@@ -176,7 +200,9 @@ class Entry extends Model {
                 ':dateEdited' => date("Y-m-d H:i:s",time()),
                 ':editorID' => $this->editorID,
                 ':anhangID' => $this->anhangID,
-                ':categoryID' => $this->categoryID)
+                ':categoryID' => $this->categoryID,
+                ':locked' => $this->locked,
+                ':lockedBy' => $this->lockedBy)
             );
             return 0;
         }
@@ -195,5 +221,6 @@ class Entry extends Model {
             );
         }
         return 0;
-    }  
+    }
+    
 }

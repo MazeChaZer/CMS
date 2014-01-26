@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 16, 2014 at 12:19 PM
--- Server version: 5.6.11
--- PHP Version: 5.5.3
+-- Host: localhost
+-- Erstellungszeit: 26. Jan 2014 um 17:33
+-- Server Version: 5.6.14
+-- PHP-Version: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,15 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cms`
+-- Datenbank: `cms`
 --
-CREATE DATABASE IF NOT EXISTS `cms` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cms`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Tabellenstruktur für Tabelle `categories`
 --
 
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -38,30 +36,30 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`categoryID`),
   KEY `groupID_idx` (`groupID`),
   KEY `creatorID_idx` (`creatorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorygroups`
+-- Tabellenstruktur für Tabelle `categoryGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `categorygroups` (
+CREATE TABLE IF NOT EXISTS `categoryGroups` (
   `groupID` int(11) NOT NULL,
   `bezeichnung` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`groupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entries`
+-- Tabellenstruktur für Tabelle `entries`
 --
 
 CREATE TABLE IF NOT EXISTS `entries` (
   `entryID` int(11) NOT NULL,
   `authorID` int(11) NOT NULL,
-  `URL` varchar(16) DEFAULT NULL,
+  `URL` varchar(256) DEFAULT NULL,
   `dateCreated` timestamp NULL DEFAULT NULL,
   `titel` varchar(16) DEFAULT NULL,
   `inhalt` text,
@@ -69,46 +67,47 @@ CREATE TABLE IF NOT EXISTS `entries` (
   `editorID` int(11) DEFAULT NULL,
   `anhangID` int(11) DEFAULT NULL,
   `categoryID` int(11) DEFAULT NULL,
+  `locked` timestamp NULL DEFAULT NULL,
+  `lockedBy` int(11) DEFAULT NULL,
   PRIMARY KEY (`entryID`),
+  UNIQUE KEY `lockedBy` (`lockedBy`),
   KEY `authorID_idx` (`authorID`),
   KEY `anhangID_idx` (`anhangID`),
   KEY `blogID_idx` (`categoryID`),
   KEY `editorID` (`editorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rights`
+-- Tabellenstruktur für Tabelle `rights`
 --
 
 CREATE TABLE IF NOT EXISTS `rights` (
   `rechtID` int(11) NOT NULL,
   `bezeichnung` varchar(45) NOT NULL,
   PRIMARY KEY (`rechtID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uploadeddata`
+-- Tabellenstruktur für Tabelle `uploadedData`
 --
 
-CREATE TABLE IF NOT EXISTS `uploadeddata` (
+CREATE TABLE IF NOT EXISTS `uploadedData` (
   `dataID` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `size` int(11) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `hash` varchar(45) DEFAULT NULL,
+  `name` varchar(16) NOT NULL,
+  `ablageort` varchar(45) DEFAULT NULL,
   `uploaderID` int(11) DEFAULT NULL,
   PRIMARY KEY (`dataID`),
   KEY `uploaderID_idx` (`uploaderID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabellenstruktur für Tabelle `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -120,74 +119,75 @@ CREATE TABLE IF NOT EXISTS `user` (
   `passwordEncrypted` tinyint(1) NOT NULL DEFAULT '0',
   `sessiontoken` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroups`
+-- Tabellenstruktur für Tabelle `userGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `usergroups` (
+CREATE TABLE IF NOT EXISTS `userGroups` (
   `userID` int(11) NOT NULL,
   `groupID` int(11) NOT NULL,
   PRIMARY KEY (`userID`,`groupID`),
   KEY `groupID_idx` (`groupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userrights`
+-- Tabellenstruktur für Tabelle `userRights`
 --
 
-CREATE TABLE IF NOT EXISTS `userrights` (
+CREATE TABLE IF NOT EXISTS `userRights` (
   `userID` int(11) NOT NULL,
   `rechtID` int(11) NOT NULL,
   `recht` int(11) DEFAULT '0',
   PRIMARY KEY (`userID`,`rechtID`),
   KEY `RechtID_idx` (`rechtID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Constraints for dumped tables
+-- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints for table `categories`
+-- Constraints der Tabelle `categories`
 --
 ALTER TABLE `categories`
-  ADD CONSTRAINT `groupID` FOREIGN KEY (`groupID`) REFERENCES `categorygroups` (`groupID`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `creatorID` FOREIGN KEY (`creatorID`) REFERENCES `user` (`userID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `creatorID` FOREIGN KEY (`creatorID`) REFERENCES `user` (`userID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `groupID` FOREIGN KEY (`groupID`) REFERENCES `categoryGroups` (`groupID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `entries`
+-- Constraints der Tabelle `entries`
 --
 ALTER TABLE `entries`
-  ADD CONSTRAINT `editorID` FOREIGN KEY (`editorID`) REFERENCES `user` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `anhangID` FOREIGN KEY (`anhangID`) REFERENCES `uploadeddata` (`dataID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `entries_ibfk_1` FOREIGN KEY (`lockedBy`) REFERENCES `user` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `anhangID` FOREIGN KEY (`anhangID`) REFERENCES `uploadedData` (`dataID`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `authorID` FOREIGN KEY (`authorID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `categoryID` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `categoryID` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`categoryID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `editorID` FOREIGN KEY (`editorID`) REFERENCES `user` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `uploadeddata`
+-- Constraints der Tabelle `uploadedData`
 --
-ALTER TABLE `uploadeddata`
+ALTER TABLE `uploadedData`
   ADD CONSTRAINT `uploaderID` FOREIGN KEY (`uploaderID`) REFERENCES `user` (`userID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `usergroups`
+-- Constraints der Tabelle `userGroups`
 --
-ALTER TABLE `usergroups`
-  ADD CONSTRAINT `userIDgroup` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `groupIDuser` FOREIGN KEY (`groupID`) REFERENCES `categorygroups` (`groupID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `userGroups`
+  ADD CONSTRAINT `groupIDuser` FOREIGN KEY (`groupID`) REFERENCES `categoryGroups` (`groupID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userIDgroup` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `userrights`
+-- Constraints der Tabelle `userRights`
 --
-ALTER TABLE `userrights`
-  ADD CONSTRAINT `UserID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `RechtID` FOREIGN KEY (`rechtID`) REFERENCES `rights` (`rechtID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `userRights`
+  ADD CONSTRAINT `RechtID` FOREIGN KEY (`rechtID`) REFERENCES `rights` (`rechtID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `UserID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

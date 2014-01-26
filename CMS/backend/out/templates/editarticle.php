@@ -27,6 +27,10 @@
 //     {
 ?>
         <section>
+            <?php if(@$this->data['locked']) {?>
+            <p>Dieser Artikel ist zuzeit gesperrt.</p>
+            <p><a href="<?php echo BACKENDURL; ?>index.php?page=articlemanager">Zurück zur Artikelübersicht</a></p>
+            <?php } else { ?>
             <?php
                 if(isset($this->data['new']))
                 {
@@ -49,12 +53,19 @@
                 </p>
                 <p class="cms-important">
                     <span>Dateien mit diesem Artikel verknpüfen</span>
+                    <select name="anhang">
+                        <option></option>
+                        <?php foreach($this->data['uploads'] as $upload) { ?>
+                            <option value="<?php echo $upload['dataID']; ?>"<?php if($this->data['articledata']['attachment'] == $upload['dataID']){ ?> selected="selected"<?php } ?>><?php echo $upload['name']; ?></option>
+                        <?php } ?>
+                    </select>
                 </p>
                 <p>
                     <button type="submit">Speichern</button>
                 </p>
             </form>
             </section>
+            <?php } ?>
         </section>
         <script src="out/plugins/ckeditor/ckeditor.js"></script>
         <script>

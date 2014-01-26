@@ -18,14 +18,16 @@ class c_editarticle extends controller {
             $entry = new Entry();
             if(isset($_GET['id'])){
                 $entry->load($_GET['id']);
+                $entry->setLocked(NULL);
+                $entry->setLockedBy(NULL);
             } else {
                 $entry->setAuthorID($_SESSION['user']);
             }
             $entry->setTitel($_POST['titel']);
             $entry->setInhalt($_POST['artikel']);
-            $entry->setAnhangID($_POST['anhang']);
+            @$entry->setAnhangID($_POST['anhang']);
             $entry->save();
-            header('Location: '.BACKENDURL.'index.php?page=editarticle&id=' . $entry->getEntryID());
+            header('Location: '.BACKENDURL.'index.php?page=articlemanager');
             die();
         }
         if(!isset($_GET['id'])){
@@ -37,32 +39,41 @@ class c_editarticle extends controller {
                 die("Eintrag existiert nicht.");
             }
             
-            $author = new User();
-            $author->load($entry->getAuthorID());
+            if($entry->getLocked() == NULL || $_SESSION['user'] == $entry->getLockedBy() || (strtotime($entry->getLocked()) + EDITLOCKDURATION) < time()){
             
-            $editor = new User();
-            if($editor->load($entry->getEditorID()) == 0){
-                $editorArray = array(   "username" => $editor->getUsername(),
-                                        "email" => $editor->getEmail()
-                                    );
+                $entry->setLocked(date("Y-m-d H:i:s",time()));
+                $entry->setLockedBy($_SESSION['user']);
+                $entry->save();
+                
+                $author = new User();
+                $author->load($entry->getAuthorID());
+                
+                $editor = new User();
+                if($editor->load($entry->getEditorID()) == 0){
+                    $editorArray = array(   "username" => $editor->getUsername(),
+                                            "email" => $editor->getEmail()
+                                        );
+                } else {
+                    $editorArray = array();
+                }
+                
+                $articledata = array(   "entryID" => $entry->getEntryID(),
+                                        "author" => array(  "username" => $author->getUsername(),
+                                                            "email" => $author->getEmail()
+                                                        ),
+                                        "url" => $entry->getURL(),
+                                        "dateCreated" => $entry->getDateCreated(),
+                                        "titel" => $entry->getTitel(),
+                                        "inhalt" => $entry->getInhalt(),
+                                        "dateEdited" => $entry->getDateEdited(),
+                                        "editor" => $editorArray,
+                                        "attachment" => $entry->getAnhangID(),
+                                        "category" => "<Entity fehlt noch>");
+                $this->view->setData(array( "articledata" => $articledata,
+                                            "uploads" => Model::getData()));
             } else {
-                $editorArray = array();
+                $this->view->setData(array("locked" => TRUE));
             }
-            
-            $articledata = array(   "entryID" => $entry->getEntryID(),
-                                    "author" => array(  "username" => $author->getUsername(),
-                                                        "email" => $author->getEmail()
-                                                    ),
-                                    "url" => $entry->getURL(),
-                                    "dateCreated" => $entry->getDateCreated(),
-                                    "titel" => $entry->getTitel(),
-                                    "inhalt" => $entry->getInhalt(),
-                                    "dateEdited" => $entry->getDateEdited(),
-                                    "editor" => $editorArray,
-                                    "attachment" => $entry->getAnhangID(),
-                                    "category" => "<Entity fehlt noch>");
-            $this->view->setData(array( "articledata" => $articledata,
-                                        "uploads" => Model::getData()));
         }
         $this->view->out();
     }
