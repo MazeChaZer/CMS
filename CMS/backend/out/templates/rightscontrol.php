@@ -7,7 +7,7 @@
 $user = array ( 'Alf', 'Karl', 'Lukas', 'Lukas2', 'Schalke', 'Jönas', 'DerKönig' );
 $usergroups = array ( 'Administratoren', 'Superuser', 'Roots', 'Batman' );
 
-if ( empty($this->data) )
+if ( empty($this->data['user']) )
 {
 ?>    
 <section class="cms-table cms-full">

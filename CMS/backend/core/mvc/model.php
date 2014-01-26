@@ -131,4 +131,10 @@ class Model
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getUsers()
+    {
+        $st = self::$db->prepare("SELECT * FROM user");
+        $st->execute();
+        return $st->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

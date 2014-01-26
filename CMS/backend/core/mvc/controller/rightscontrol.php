@@ -41,6 +41,9 @@ class c_rightsControl extends controller {
             $result['user'] = $user->getUsername();
 
             $this->view->setData($result);
+        } else {
+            new Model(); //q+d
+            $this->view->setData(array('users' => Model::getUsers()));
         }
 
         $this->view->out();
