@@ -14,7 +14,6 @@ class c_editarticle extends controller {
     
     public function start(){
         if(isset($_POST['titel'])){
-//             print_r($_POST);
             $entry = new Entry();
             if(isset($_GET['id'])){
                 $entry->load($_GET['id']);
@@ -37,7 +36,6 @@ class c_editarticle extends controller {
         }
         if(!isset($_GET['id'])){
             $this->view->setData(array("new" => TRUE, "articledata" => array("inhalt" => "", "titel" => "")));
-            echo "Neuer Artikel";
         } else {
             $entry = new Entry();
             if($entry->load($_GET['id']) == 1){
