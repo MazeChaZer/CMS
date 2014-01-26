@@ -1,7 +1,6 @@
 <?php
     require 'head.php';
 ?>
-<h2>Artikelverwaltung</h2>
 <?php
 //     if(!isset($_GET['id']))
 //     {
@@ -34,11 +33,11 @@
             <?php
                 if(isset($this->data['new']))
                 {
-                    print('<h3>Neuen Artikel erstellen</h3>');
+                    print('<h2>Neuen Artikel erstellen</h2>');
                 }
                 else
                 {
-                    print('<h3>Artikel bearbeiten</h3>');
+                    print('<h2>Artikel bearbeiten</h2>');
                 }
             ?>
             <section>
@@ -62,6 +61,12 @@
                 </p>
                 <p>
                     <button type="submit">Speichern</button>
+                    <?php
+                        if ( !isset($this->data['new']) )
+                        {
+                            printf ( '<button><a href="?page=editarticle&delete=%s">Diesen Artikel löschen</a></button>', $this->data[ 'articledata' ]['entryID'] );
+                        }
+                    ?>
                 </p>
             </form>
             </section>

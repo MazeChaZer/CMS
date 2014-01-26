@@ -20,12 +20,11 @@
                 <section>
                     <hgroup>
                         <h1>CMS</h1>
-                        <h3>V 0.3</h3>
                     </hgroup>
                 </section>
                 <menu role="menu">
                     <nav role="navigation" role="presentation">
-                        <a href="?page=editarticle">
+                        <a href="?page=articlemanager">
                             <figure class="fa fa-file-text">
                                 <figcaption>Artikelverwaltung</figcaption>
                             </figure>
