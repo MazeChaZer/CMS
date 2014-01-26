@@ -34,9 +34,17 @@
             {
                 print ( '<tr>' );
                     printf ( '<td>%s</td>', $data[ 'titel' ] );
-                    printf ( '<td>%s</td>', $data[ 'dateCreated' ] );
-                    printf ( '<td>%s</td>', $data[ 'dateEdited' ] );
-                    printf ( '<td><button><a href="?page=editarticle&id=%s">Editieren</a></button></td>', $data['entryID'] );
+                    printf ( '<td>%s</td>', date ( 'd.m.Y - H:i:s', strtotime( $data[ 'dateCreated' ] ) ) );
+                    printf ( '<td>%s</td>', date ( 'd.m.Y - H:i:s', strtotime ( $data[ 'dateEdited' ] ) ) );
+                    
+                    if ( !isset($data['locked']))
+                    {
+                      printf ( '<td><button><a href="?page=editarticle&id=%s">Editieren</a></button></td>', $data['entryID'] );
+                    }
+                    else
+                    {
+                        printf ( '<td><button class="fa fa-lock"></button></td>' );
+                    }
                 print ( '</tr>' );
             }
         ?>
