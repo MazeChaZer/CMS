@@ -16,17 +16,13 @@ header {
     box-shadow: 0 0 10px rgba( 0, 0, 0, .5 );
 }
 
-header>menu {
-    
-    display: block;
-}
-
 header>figure{
     padding: 140px 0;
         
     background-image: url( '../img/matterhorn.jpg' );
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-position: center -360px;
+    background-repeat: #444;
     
     border-width: 0 0 1px 0;
     border-style: solid;
