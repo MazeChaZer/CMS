@@ -23,6 +23,9 @@ class c_register extends controller {
                 $user->setPassword($_POST['cms-registerdata#password'], false);
                 $user->setEmail($_POST['cms-registerdata#email']);
                 $user->save();
+                foreach(Model::getRights() as $right){
+                    $user->setRight($right, 0);
+                }
                 header('Location: '.BACKENDURL.'index.php?page=login');
                 die();
             }
