@@ -71,7 +71,7 @@ INSERT INTO `rights` (`rechtID`, `bezeichnung`) VALUES
 (8, 'Dokumente hochladen'),
 (9, 'Dokumente umbenennen'),
 (10, 'Dokumente löschen'),
-(11, 'Rechte editieren');
+(11, 'Rechte editieren'),
 
 --
 -- Daten für Tabelle `userrights`
