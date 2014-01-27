@@ -3,6 +3,7 @@
 require_once('backend/core/init/settings.php');
 
 $db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
+$db->exec("set names utf8");
 $st = $db->prepare("SELECT * FROM categories;");
 $st->execute();
 $data['categories'] = $st->fetchAll(PDO::FETCH_ASSOC);
