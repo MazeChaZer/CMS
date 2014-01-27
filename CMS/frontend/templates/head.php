@@ -12,7 +12,7 @@
             <figure>
                 <hgroup>
                     <h1>Demo CMS</h1>
-                    <h2>Weil wirs können</h2>
+                    <h2>Weil wir's können</h2>
                 </hgroup>
             </figure>
         </header>
