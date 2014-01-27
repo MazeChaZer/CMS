@@ -6,6 +6,9 @@ $db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
 $st = $db->prepare("SELECT * FROM categories;");
 $st->execute();
 $data['categories'] = $st->fetchAll(PDO::FETCH_ASSOC);
+$st = $db->prepare("SELECT * FROM entries;");
+$st->execute();
+$data['allarticles'] = $st->fetchAll(PDO::FETCH_ASSOC);
 if(substr($_GET['request'], 0, 8) == "category") {
 	$categoryID = substr($_GET['request'], 9);
 	$st = $db->prepare("SELECT bezeichnung FROM categories WHERE categoryID = :categoryID;");
