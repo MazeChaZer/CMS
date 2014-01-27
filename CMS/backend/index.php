@@ -4,7 +4,8 @@ require_once('core/init/init.php');
 require_once('core/mvc/model/entities/User.php');
 
 if(empty($_GET['page'])){
-    $_GET['page'] = 'home';
+//     $_GET['page'] = 'home';
+    $_GET['page'] = 'articlemanager';
 }
 
 $controllerPath = 'core/mvc/controller/'.$_GET['page'].'.php';
@@ -14,7 +15,7 @@ if(!file_exists($controllerPath) || strpos($_GET['page'],"../") !== False){ // I
 }
 
 require_once($controllerPath);
-    
+
 $classname = "ITC\\CMS\\c_".$_GET['page'];
 $controller = new $classname();
 
@@ -40,5 +41,5 @@ if($authFailed){
     die();
 }
 $controller->start();
- 
+
 ?>

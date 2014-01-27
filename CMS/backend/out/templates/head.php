@@ -14,8 +14,8 @@
         <div class="cms-acp">
             <header>
                 <nav>
-                    <a class="fa fa-home" tooltip tooltip-text="Frontend" tooltip-direction="bottom" href="<?= URL ?>" target="_blank"></a>  
-                    <a class="fa fa-sign-out" tooltip tooltip-text="Logout" tooltip-direction="bottom" href="?page=logout"></a> 
+                    <a class="fa fa-home" tooltip tooltip-text="Frontend" tooltip-direction="bottom" href="<?= URL ?>" target="_blank"></a>
+                    <a class="fa fa-sign-out" tooltip tooltip-text="Logout" tooltip-direction="bottom" href="?page=logout"></a>
                 </nav>
                 <section>
                     <hgroup>
@@ -29,11 +29,6 @@
                                 <figcaption>Artikelverwaltung</figcaption>
                             </figure>
                         </a>
-<!--                        <a href="?module">
-                            <figure class="fa fa-puzzle-piece">
-                                <figcaption>Menüpunk3</figcaption>
-                            </figure>
-                        </a>-->
                         <a href="?page=filemanager">
                             <figure class="fa fa-cloud-upload">
                                 <figcaption>Dateiverwaltung</figcaption>
@@ -42,6 +37,11 @@
                         <a href="?page=rightscontrol">
                             <figure class="fa fa-dashboard">
                                 <figcaption>Rechteverwaltung</figcaption>
+                            </figure>
+                        </a>
+                        <a href="?page=categories">
+                            <figure class="fa fa-puzzle-piece">
+                                <figcaption>Kategorien</figcaption>
                             </figure>
                         </a>
                     </nav>

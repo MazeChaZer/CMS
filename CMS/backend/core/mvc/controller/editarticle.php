@@ -11,8 +11,15 @@ class c_editarticle extends controller {
     public function __construct(){
         parent::__construct("editarticle");
     }
-    
+
     public function start(){
+		if(isset($_POST['delete'])){
+			$entry = new Entry();
+			$entry->load($_GET['id']);
+			$entry->delete();
+            header('Location: '.BACKENDURL.'index.php?page=articlemanager');
+            die();
+		}
         if(isset($_POST['titel'])){
             $entry = new Entry();
             if(isset($_GET['id'])){
@@ -24,6 +31,13 @@ class c_editarticle extends controller {
             }
             $entry->setTitel($_POST['titel']);
             $entry->setInhalt($_POST['artikel']);
+            $entry->setURL(strtolower($_POST['url']));
+            if($_POST['category'] == ''){
+                $category = NULL;
+            } else {
+                $category = $_POST['category'];
+            }
+            $entry->setCategoryID($category);
             if($_POST['anhang'] == ''){
                 $anhang = NULL;
             } else {
@@ -35,22 +49,26 @@ class c_editarticle extends controller {
             die();
         }
         if(!isset($_GET['id'])){
-            $this->view->setData(array("new" => TRUE, "articledata" => array("inhalt" => "", "titel" => "")));
+			new Model(); //q+d
+            $this->view->setData(array(	"new" => TRUE,
+										"articledata" => array("inhalt" => "", "titel" => "", "url" => ""),
+										"uploads" => Model::getData(),
+										"categories" => Model::getCategories()));
         } else {
             $entry = new Entry();
             if($entry->load($_GET['id']) == 1){
                 die("Eintrag existiert nicht.");
             }
-            
+
             if($entry->getLocked() == NULL || $_SESSION['user'] == $entry->getLockedBy() || (strtotime($entry->getLocked()) + EDITLOCKDURATION) < time()){
-            
+
                 $entry->setLocked(date("Y-m-d H:i:s",time()));
                 $entry->setLockedBy($_SESSION['user']);
                 $entry->save();
-                
+
                 $author = new User();
                 $author->load($entry->getAuthorID());
-                
+
                 $editor = new User();
                 if($editor->load($entry->getEditorID()) == 0){
                     $editorArray = array(   "username" => $editor->getUsername(),
@@ -59,7 +77,7 @@ class c_editarticle extends controller {
                 } else {
                     $editorArray = array();
                 }
-                
+
                 $articledata = array(   "entryID" => $entry->getEntryID(),
                                         "author" => array(  "username" => $author->getUsername(),
                                                             "email" => $author->getEmail()
@@ -71,9 +89,10 @@ class c_editarticle extends controller {
                                         "dateEdited" => $entry->getDateEdited(),
                                         "editor" => $editorArray,
                                         "attachment" => $entry->getAnhangID(),
-                                        "category" => "<Entity fehlt noch>");
-                $this->view->setData(array( "articledata" => $articledata,
-                                            "uploads" => Model::getData()));
+                                        "category" => $entry->getCategoryID());
+				$this->view->setData(array( "articledata" => $articledata,
+											"uploads" => Model::getData(),
+											"categories" => Model::getCategories()));
             } else {
                 $this->view->setData(array("locked" => TRUE));
             }

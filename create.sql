@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `categoryID` int(11) NOT NULL,
-  `bezeichnung` varchar(16) NOT NULL,
+  `bezeichnung` varchar(256) NOT NULL,
   `creatorID` int(11) DEFAULT NULL,
   `dateCreated` timestamp NULL DEFAULT NULL,
   `beschreibung` text,
@@ -59,9 +59,9 @@ CREATE TABLE IF NOT EXISTS `categorygroups` (
 CREATE TABLE IF NOT EXISTS `entries` (
   `entryID` int(11) NOT NULL,
   `authorID` int(11) NOT NULL,
-  `URL` varchar(16) DEFAULT NULL,
+  `URL` varchar(256) DEFAULT NULL,
   `dateCreated` timestamp NULL DEFAULT NULL,
-  `titel` varchar(16) DEFAULT NULL,
+  `titel` varchar(256) DEFAULT NULL,
   `inhalt` text,
   `dateEdited` timestamp NULL DEFAULT NULL,
   `editorID` int(11) DEFAULT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `uploadedData` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int(11) NOT NULL,
-  `username` varchar(16) NOT NULL,
+  `username` varchar(256) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(512) NOT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,

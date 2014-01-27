@@ -5,12 +5,12 @@ namespace ITC\CMS;
 require_once('core/mvc/model/entities/User.php');
 
 class c_login extends controller {
-    
+
     public function __construct(){
         parent::__construct("login");
         $this->setIsPublic(TRUE);
     }
-    
+
     public function start(){
         if(isset($_POST['cms-logindata#username'])){
             $user = new User();
@@ -28,7 +28,7 @@ class c_login extends controller {
                         setcookie("userid", $user->getUserID(), time()+60*60*24*14);
                         setcookie("logintoken", $token, time()+60*60*24*14);
                     }
-                    header('Location: '.BACKENDURL.'index.php?page=home');
+                    header('Location: '.BACKENDURL.'index.php');
                     die();
                 } else {
                     $login = FALSE;
@@ -48,6 +48,6 @@ class c_login extends controller {
         }
         $this->view->out();
     }
-    
+
 }
 ?>

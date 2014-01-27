@@ -44,29 +44,44 @@
             <form method="post" action="<?php echo BACKENDURL; ?>index.php?page=editarticle<?php if( !isset($this->data["new"])){ ?>&amp;id=<?php echo $this->data['articledata']['entryID']; ?><?php } ?>">
                 <p>
                     <label>Artikelname</label>
-                    <input type="text" name="titel" class="cms-input-text" maxlength="32" value="<?php echo $this->data['articledata']['titel']; ?>" />
+                    <input type="text" name="titel" class="cms-input-text" value="<?php echo $this->data['articledata']['titel']; ?>" />
+                </p>
+                <p>
+                    <label>URL</label>
+                    <input type="text" name="url" class="cms-input-text" value="<?php echo $this->data['articledata']['url']; ?>" />
                 </p>
                 <p>
                     <label>Artikelinhalt</label>
                     <textarea name="artikel"><?php echo $this->data['articledata']['inhalt']; ?></textarea>
                 </p>
                 <p class="cms-important">
+                    <span>Kategorie des Artikels</span>
+                    <select name="category">
+                        <option></option>
+                        <?php foreach($this->data['categories'] as $category) { ?>
+                            <option value="<?php echo $category['categoryID']; ?>"<?php if(isset($this->data['articledata']['category']) && $this->data['articledata']['category'] == $category['categoryID']){ ?> selected="selected"<?php } ?>><?php echo $category['bezeichnung']; ?></option>
+                        <?php } ?>
+                    </select>
+                </p>
+                <p class="cms-important">
                     <span>Dateien mit diesem Artikel verknpüfen</span>
                     <select name="anhang">
                         <option></option>
                         <?php foreach($this->data['uploads'] as $upload) { ?>
-                            <option value="<?php echo $upload['dataID']; ?>"<?php if($this->data['articledata']['attachment'] == $upload['dataID']){ ?> selected="selected"<?php } ?>><?php echo $upload['name']; ?></option>
+                            <option value="<?php echo $upload['dataID']; ?>"<?php if(isset($this->data['articledata']['attachment']) && $this->data['articledata']['attachment'] == $upload['dataID']){ ?> selected="selected"<?php } ?>><?php echo $upload['name']; ?></option>
                         <?php } ?>
                     </select>
                 </p>
                 <p>
                     <button type="submit">Speichern</button>
                     <?php
-                        if ( !isset($this->data['new']) )
-                        {
-                            printf ( '<button><a href="?page=editarticle&delete=%s">Diesen Artikel löschen</a></button>', $this->data[ 'articledata' ]['entryID'] );
-                        }
-                    ?>
+                        if ( !isset($this->data['new']) ) { ?>
+
+                        <form method="post" action="<?php echo BACKENDURL; ?>index.php?page=editarticle&amp;id=<?php echo $this->data['articledata']['entryID']; ?>">
+							<button name="delete" value="1" type="submit">Diesen Artikel löschen</button>
+                        </form>
+
+                       <?php } ?>
                 </p>
             </form>
             </section>

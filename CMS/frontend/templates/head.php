@@ -15,21 +15,26 @@
        Navigation wird geladen
       </div>
       <div class="inner" id="NavigationsLinks">
-       <a href="#"> Startseite </a>
-       <a href="#" class="sub"> Inhalte </a> 
-       <a class="sub"> Design </a> 
+       <a href="<?php echo URL; ?>"> Startseite </a>
+       <a href="#" class="sub"> Kategorien </a>
+       <a class="sub"> Design </a>
        <a href="#"> Impressum </a>
       </div>
      </div>
      <div class="subs" id="NavigationSubs">
       <div>
-       convallis neque eros Vestibulum mollis a nunc pellentesque In vitae. Justo eget et justo vel at dolor Donec condimentum platea libero. Purus senectus cursus elit Curabitur adipiscing ante eros morbi rhoncus arcu. A enim laoreet faucibus suscipit enim egestas est amet orci laoreet. Wisi dolor volutpat Donec ut laoreet Curabitur velit massa non dictumst. Wisi nulla hac lacus lacinia.
+      <b> Kategorien </b>
+       <ul>
+       <?php foreach($data['categories'] as $category) { ?>
+       <li><a href="<?php echo URL; ?>category/<?php echo $category['categoryID']; ?>"><?php echo $category['bezeichnung']; ?></a></li>
+       <?php } ?>
+       </ul>
       </div>
        <div>
         <b> Designs </b>
         <table class="DesignAuswahl" id="DesignAuswahl">
          <tr>
-          <td> 
+          <td>
            <p onmouseover="DesignChange(0,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(0,2)" class="selected"> <img src="<?php echo URL; ?>frontend/img/designs/abstrakt_sub.png"> Abstrakt </p>
            <p onmouseover="DesignChange(1,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(1,2)"> <img src="<?php echo URL; ?>frontend/img/designs/baum_sub.png"> Baum </p>
            <p onmouseover="DesignChange(2,1)" onmouseout="DesignChange('Default')" onclick="DesignChange(2,2)"> <img src="<?php echo URL; ?>frontend/img/designs/palme_sub.png"> Palme </p>

@@ -22,7 +22,8 @@
 <table class="cms-full cms-table-styled">
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Titel</th>
+            <th>URL</th>
             <th>Erstellt am</th>
             <th>Zuletzt Editiert am</th>
             <th></th>
@@ -34,16 +35,26 @@
             {
                 print ( '<tr>' );
                     printf ( '<td>%s</td>', $data[ 'titel' ] );
+                    printf ( '<td>/%s</td>', $data[ 'URL' ] );
                     printf ( '<td>%s</td>', date ( 'd.m.Y - H:i:s', strtotime( $data[ 'dateCreated' ] ) ) );
-                    printf ( '<td>%s</td>', date ( 'd.m.Y - H:i:s', strtotime ( $data[ 'dateEdited' ] ) ) );
-                    
-                    if ( !isset($data['locked']))
+                    if($data['dateEdited'] == NULL){
+						$dateEdited = "Noch nie";
+                    } else {
+						$dateEdited = date ( 'd.m.Y - H:i:s', strtotime ( $data[ 'dateEdited' ] ) );
+                    }
+                    printf ( '<td>%s</td>', $dateEdited);
+
+                    if ( isset($data['locked']) && $data['lockedBy'] != $_SESSION['user'])
                     {
-                      printf ( '<td><button><a href="?page=editarticle&id=%s">Editieren</a></button></td>', $data['entryID'] );
+                        printf ( '<td><button class="fa fa-lock"></button></td>' );
+                    }
+                    elseif ( isset($data['locked']))
+                    {
+						printf ( '<td><a href="?page=editarticle&id=%s">Editieren (noch geöffnet)</a></td>', $data['entryID'] );
                     }
                     else
                     {
-                        printf ( '<td><button class="fa fa-lock"></button></td>' );
+                        printf ( '<td><a href="?page=editarticle&id=%s">Editieren</a></td>', $data['entryID'] );
                     }
                 print ( '</tr>' );
             }

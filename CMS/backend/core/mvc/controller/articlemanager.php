@@ -32,6 +32,16 @@ class c_articlemanager extends Controller {
             die();
         }
         new Model(); //q+d
+        $articles = Model::getEntries();
+        foreach($articles as $article){
+			if(isset($article['locked']) && strtotime($article['locked']) + EDITLOCKDURATION < time()){
+				$entry = new Entry();
+				$entry->load($article['entryID']);
+				$entry->setLocked(NULL);
+				$entry->setLockedBy(NULL);
+				$entry->save();
+			}
+        }
         $this->view->setData(array("articles" => Model::getEntries()));
         $this->view->out();
     }
