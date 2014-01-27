@@ -18,6 +18,20 @@ class c_rightsControl extends controller {
         $isRightValueSet = isset($_POST["rightValue"]);
 
         if ($isUsernameSet || $isEmailSet) {
+            if(isset($_POST['cms-rights#name'])){
+                $user = new User();
+                $user->loadByUsername($_POST['cms-rights#name']);
+                foreach($_POST['cms-rights'] as $id => $right){
+                    if($right == "on"){
+                        $rightbool = 1;
+                    } else {
+                        $rightbool = NULL;
+                    }
+                    $user->setRight($id, $rightbool);
+                }
+                header('Location: '.BACKENDURL.'index.php?page=rightscontrol');
+                die();
+            }
             $user = new User();
 
             if ($isUsernameSet) {
@@ -25,9 +39,9 @@ class c_rightsControl extends controller {
             } else {
                 $user->loadByEmail($_GET["email"]);
             }
-            if ($isRightValueSet && $isApplyRightIDSet) {
-                $user->setRight($_POST["rightId"], $_POST["rightValue"]);
-            }
+//             if ($isRightValueSet && $isApplyRightIDSet) {
+//                 $user->setRight($_POST["rightId"], $_POST["rightValue"]);
+//             }
 
             $allRights = $user->getRights();
             $result = array();

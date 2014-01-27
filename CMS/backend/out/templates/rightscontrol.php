@@ -54,9 +54,9 @@ else
                             print ( '<span class="cms-large">' . $r[ 'bezeichnung' ] . '</span> ');
                         print ( '</td>' );
                         print ( '<td>' );
-                            print ( '<input type="radio" id="' . $r[ 'id' ] . '" name="cms-rights#' . $r[ 'id' ] . '" value="on" required ' . ( ( $r[ 'wert' ] ) ? 'checked ' : '' ) . ( ( $r[ 'disabled' ] ) ? 'disabled ' : '' ) . '/> ');
+                            print ( '<input type="radio" id="' . $r[ 'id' ] . '" name="cms-rights[' . $r[ 'id' ] . ']" value="on" required ' . ( ( $r[ 'wert' ] ) ? 'checked ' : '' ) . ( ( $r[ 'disabled' ] ) ? 'disabled ' : '' ) . '/> ');
                             print ( '<label for="' . $r[ 'id' ] . '" class="radioInput firstInput">Ja</label> ');
-                            print ( '<input type="radio" id="not-' . $r[ 'id' ] . '" name="cms-rights#' . $r[ 'id' ] . '" value="off" required ' . ( ( !$r[ 'wert' ] ) ? 'checked ' : '' ) . ( ( $r[ 'disabled' ] ) ? 'disabled ' : '' ) . '/> ');
+                            print ( '<input type="radio" id="not-' . $r[ 'id' ] . '" name="cms-rights[' . $r[ 'id' ] . ']" value="off" required ' . ( ( !$r[ 'wert' ] ) ? 'checked ' : '' ) . ( ( $r[ 'disabled' ] ) ? 'disabled ' : '' ) . '/> ');
                             print ( '<label for="not-' . $r[ 'id' ] . '"  class="radioInput lastInput">Nein</label> ');
                         print ( '</td>' );
                         print ( '</tr>' );

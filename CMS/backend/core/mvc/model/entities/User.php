@@ -276,7 +276,7 @@ class User extends Model {
                 ':rechtID' => $RechtID)
             );
             $result = $st->fetch(PDO::FETCH_ASSOC);
-            if(!empty($result) && $result['recht'] = 1)
+            if(!empty($result) && $result['recht'] == 1)
             {
                 return true;
             }
