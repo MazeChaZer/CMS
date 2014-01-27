@@ -29,6 +29,11 @@
                                 <figcaption>Artikelverwaltung</figcaption>
                             </figure>
                         </a>
+                        <a href="?page=categories">
+                            <figure class="fa fa-list-ul">
+                                <figcaption>Kategorien</figcaption>
+                            </figure>
+                        </a>
                         <a href="?page=filemanager">
                             <figure class="fa fa-cloud-upload">
                                 <figcaption>Dateiverwaltung</figcaption>
@@ -37,11 +42,6 @@
                         <a href="?page=rightscontrol">
                             <figure class="fa fa-dashboard">
                                 <figcaption>Rechteverwaltung</figcaption>
-                            </figure>
-                        </a>
-                        <a href="?page=categories">
-                            <figure class="fa fa-puzzle-piece">
-                                <figcaption>Kategorien</figcaption>
                             </figure>
                         </a>
                     </nav>
