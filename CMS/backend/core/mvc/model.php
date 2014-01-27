@@ -138,4 +138,15 @@ class Model
         $st->execute();
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public static function getUserrights($userID){
+        $st = self::$db->prepare("SELECT rechtID, recht FROM userrights WHERE userID = :userID;");
+        $st->execute(array(":userID" => $userID));
+        $result = $st->fetchAll(PDO::FETCH_ASSOC);
+        $userrights = array();
+        foreach($result as $userright){
+            $userrights[$userright["rechtID"]] = $userright["recht"];
+        }
+        return $userrights;
+    }
 }

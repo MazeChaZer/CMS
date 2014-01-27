@@ -53,20 +53,21 @@
     <section>
         <menu>
             <nav class="cms-navigation">
-                <a href="javascript: u.show(); void(0)" tooltip tooltip-direction="bottom" tooltip-text="Eine neue Datei hochladen">
+                <?php if($this->userrights[8]) { ?><a href="javascript: u.show(); void(0)" tooltip tooltip-direction="bottom" tooltip-text="Eine neue Datei hochladen">
                     <figure class="cms-table-cell fa fa-cloud-upload">
                         <figcaption class="cms-table-cell">Datei hochladen</figcaption>
                     </figure>
-                </a>
-                <a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Eine ausgewählte Datei umbenennen" id="rename">
+                </a><?php } ?>
+                <?php if($this->userrights[9]) { ?><a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Eine ausgewählte Datei umbenennen" id="rename">
                     <figure class="cms-table-cell fa fa-edit">
                         <figcaption>Datei umbenennen</figcaption>
                     </figure>
-                <a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Ausgewählte Dateien löschen" id="delete">
+                </a><?php } ?>
+                <?php if($this->userrights[10]) { ?><a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Ausgewählte Dateien löschen" id="delete">
                     <figure class="cms-table-cell fa fa-eraser">
                         <figcaption class="cms-table-cell">Ausgewählte Dateien Löschen</figcaption>
                     </figure>
-                </a>
+                </a><?php } ?>
             </nav>
         </menu>
     </section>

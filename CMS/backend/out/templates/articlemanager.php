@@ -3,13 +3,13 @@
 ?>
 <h2>Artikelverwaltung</h2>
 <section class="cms-padding">
-    <a href="?page=editarticle">
+    <?php if($this->userrights[4]) { ?><a href="?page=editarticle">
         <button>
             <figure class="fa fa-file cms-text-center fa-2x">
                 <figcaption class="cms-xsmall">Neuen Artikel erstellen</figcaption>
             </figure>
         </button>
-    </a>
+    </a><?php } ?>
 </section>
 <?php
     if ( empty ( $this->data ) )
@@ -26,7 +26,7 @@
             <th>URL</th>
             <th>Erstellt am</th>
             <th>Zuletzt Editiert am</th>
-            <th></th>
+            <?php if($this->userrights[5]) { ?><th></th><?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -43,7 +43,7 @@
 						$dateEdited = date ( 'd.m.Y - H:i:s', strtotime ( $data[ 'dateEdited' ] ) );
                     }
                     printf ( '<td>%s</td>', $dateEdited);
-
+if($this->userrights[5]) {
                     if ( isset($data['locked']) && $data['lockedBy'] != $_SESSION['user'])
                     {
                         printf ( '<td><button class="fa fa-lock"></button></td>' );
@@ -56,6 +56,7 @@
                     {
                         printf ( '<td><a href="?page=editarticle&id=%s">Editieren</a></td>', $data['entryID'] );
                     }
+}
                 print ( '</tr>' );
             }
         ?>

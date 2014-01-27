@@ -77,9 +77,9 @@
                     <?php
                         if ( !isset($this->data['new']) ) { ?>
 
-                        <form method="post" action="<?php echo BACKENDURL; ?>index.php?page=editarticle&amp;id=<?php echo $this->data['articledata']['entryID']; ?>">
+                        <?php if($this->userrights[6]) { ?><form method="post" action="<?php echo BACKENDURL; ?>index.php?page=editarticle&amp;id=<?php echo $this->data['articledata']['entryID']; ?>">
 							<button name="delete" value="1" type="submit">Diesen Artikel löschen</button>
-                        </form>
+                        </form><?php } ?>
 
                        <?php } ?>
                 </p>

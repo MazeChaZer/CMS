@@ -12,6 +12,7 @@ namespace ITC\CMS;
 class View
 {
     private $data;
+    private $userrights;
     private $pagename;
     
     public function __construct($pagename)
@@ -21,6 +22,11 @@ class View
     
     public function setData($data){
         $this->data = $data;
+    }
+    
+    public function setUserrights($userrights){
+        $this->userrights = $userrights;
+        print_r($userrights);
     }
     
     public function out(){

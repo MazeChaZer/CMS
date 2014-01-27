@@ -25,7 +25,7 @@ class c_rightsControl extends controller {
                     if($right == "on"){
                         $rightbool = 1;
                     } else {
-                        $rightbool = NULL;
+                        $rightbool = 0;
                     }
                     $user->setRight($id, $rightbool);
                 }

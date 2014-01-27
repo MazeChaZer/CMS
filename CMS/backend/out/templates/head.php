@@ -39,11 +39,11 @@
                                 <figcaption>Dateiverwaltung</figcaption>
                             </figure>
                         </a>
-                        <a href="?page=rightscontrol">
+                        <?php if($this->userrights[11]) { ?><a href="?page=rightscontrol">
                             <figure class="fa fa-dashboard">
                                 <figcaption>Rechteverwaltung</figcaption>
                             </figure>
-                        </a>
+                        </a><?php } ?>
                     </nav>
                 </menu>
             </header>

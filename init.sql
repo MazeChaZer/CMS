@@ -68,12 +68,10 @@ INSERT INTO `rights` (`rechtID`, `bezeichnung`) VALUES
 (4, 'Seiten erstellen'),
 (5, 'Seiten bearbeiten'),
 (6, 'Seiten löschen'),
-(7, 'Seiten lesen'),
 (8, 'Dokumente hochladen'),
-(9, 'Dokumente herunterladen'),
+(9, 'Dokumente umbenennen'),
 (10, 'Dokumente löschen'),
-(11, 'Rechte editieren'),
-(12, 'Gruppen erstellen');
+(11, 'Rechte editieren');
 
 --
 -- Daten für Tabelle `userrights`
@@ -86,12 +84,10 @@ INSERT INTO `userrights` (`userID`, `rechtID`, `recht`) VALUES
 (1, 4, 1),
 (1, 5, 1),
 (1, 6, 1),
-(1, 7, 1),
 (1, 8, 1),
 (1, 9, 1),
 (1, 10, 1),
 (1, 11, 1),
-(1, 12, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

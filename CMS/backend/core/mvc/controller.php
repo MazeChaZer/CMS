@@ -10,6 +10,10 @@ class Controller
     
     public function __construct($pagename){
         $this->view = new View($pagename);
+        if(isset($_SESSION['user'])){
+            new Model(); //q+d
+            $this->view->setUserrights(Model::getUserrights($_SESSION['user']));
+        }
     }
     
     public function getIsPublic(){

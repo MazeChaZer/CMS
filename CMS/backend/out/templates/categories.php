@@ -53,20 +53,21 @@
     <section>
         <menu>
             <nav class="cms-navigation">
-                <a href="javascript: u.show(); void(0)" tooltip tooltip-direction="bottom" tooltip-text="Eine neue Kategorie erstellen">
+                <?php if($this->userrights[1]) { ?><a href="javascript: u.show(); void(0)" tooltip tooltip-direction="bottom" tooltip-text="Eine neue Kategorie erstellen">
                     <figure class="cms-table-cell fa fa-file">
                         <figcaption class="cms-table-cell">Kategorie erstellen</figcaption>
                     </figure>
-                </a>
-                <a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Eine ausgewählte Kategorie umbenennen" id="rename">
+                </a><?php } ?>
+                <?php if($this->userrights[3]) { ?><a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Eine ausgewählte Kategorie umbenennen" id="rename">
                     <figure class="cms-table-cell fa fa-edit">
                         <figcaption>Kategorie umbenennen</figcaption>
                     </figure>
-                <a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Ausgewählte Kategorien löschen" id="delete">
+                </a><?php } ?>
+                <?php if($this->userrights[2]) { ?><a class="cms-disabled" tooltip tooltip-direction="bottom" tooltip-text="Ausgewählte Kategorien löschen" id="delete">
                     <figure class="cms-table-cell fa fa-eraser">
                         <figcaption class="cms-table-cell">Ausgewählte Kategorien Löschen</figcaption>
                     </figure>
-                </a>
+                </a><?php } ?>
             </nav>
         </menu>
     </section>
