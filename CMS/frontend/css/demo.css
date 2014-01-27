@@ -103,6 +103,10 @@ section[role="main"]>div.main {
     display: table-cell;
 }
 
+section[role="main"]>div.main>ul {
+    padding: .5em;
+}
+
 section[role="main"]>div a {
     color: rgb( 33, 33, 33 );
 }

@@ -1,6 +1,7 @@
 <!Doctype html>
 <html lang="de">
     <head>
+        <base href="<?= URL ?>" />
         <link rel="stylesheet" href="frontend/css/demo.css" />
         <link href='http://fonts.googleapis.com/css?family=Great+Vibes|Roboto:400,100,300,700,500|Roboto+Condensed:400,300|Roboto+Slab' rel='stylesheet' type='text/css'>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
