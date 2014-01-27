@@ -54,7 +54,7 @@
                     <label>Artikelinhalt</label>
                     <textarea name="artikel"><?php echo $this->data['articledata']['inhalt']; ?></textarea>
                 </p>
-                <p class="cms-important">
+                <p class="cms-important cms-margin cms-padding">
                     <span>Kategorie des Artikels</span>
                     <select name="category">
                         <option></option>
@@ -63,8 +63,8 @@
                         <?php } ?>
                     </select>
                 </p>
-                <p class="cms-important">
-                    <span>Dateien mit diesem Artikel verknpüfen</span>
+                <p class="cms-important cms-margin cms-padding">
+                    <span>Dateien mit diesem Artikel verknüpfen</span>
                     <select name="anhang">
                         <option></option>
                         <?php foreach($this->data['uploads'] as $upload) { ?>
