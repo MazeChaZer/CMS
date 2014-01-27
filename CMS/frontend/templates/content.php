@@ -4,8 +4,8 @@
 	<div id="content"><?php echo $data['inhalt']; ?></div>
 	<?php if(isset($data['anhang'])) { ?>
 		<div id="anhang">
-			<h3>Anhang</h3>
-			<a href="<?php echo BACKENDURL; ?>files/<?php echo $data['anhang']['hash']; ?>"><?php echo $data['anhang']['name']; ?></a>
+                    <br />
+			<a href="<?php echo BACKENDURL; ?>files/download.php?fileid=<?php echo $data['anhang']['dataID']; ?>"><?php echo $data['anhang']['name']; ?></a>
 		</div>
 	<?php } ?>
 </div>
