@@ -20,6 +20,7 @@ class Model
         if(!isset(self::$db))
         {
             self::$db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
+            self::$db->exec("set names utf8");
         }
     }
 
