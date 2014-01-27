@@ -56,7 +56,7 @@ header>figure>hgroup {
 
 header>figure>hgroup>h1 {
     color: rgb( 33, 33, 33 );
-    font-size: 48pt;
+    font-size: 54pt;
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
     text-shadow: 0 0 2px rgb( 33, 33, 33 );
@@ -64,7 +64,7 @@ header>figure>hgroup>h1 {
 }
 
 header>figure>hgroup>h2 {
-    color: rgb( 222, 222, 222 );
+    color: rgb( 44, 44, 44 );
     font-size: 28pt;
     font-family: 'Roboto Condensed', sans-serif;
     text-shadow: 0 0 1px rgb( 0, 0, 0 );

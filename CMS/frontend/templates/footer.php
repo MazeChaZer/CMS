@@ -11,7 +11,7 @@
    amount:100,
    form: 1,
    width: window.innerWidth,
-   height: window.innerHeight,
+   height: $('header').height(),
    speed: [10, 100],
    clear: true,
    css: { position: 'absolute', border: '0', top: '0', left: '0', zIndex: '0' },
