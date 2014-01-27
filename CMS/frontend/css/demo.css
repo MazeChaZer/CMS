@@ -34,6 +34,9 @@ header>figure{
 }
 
 header>figure>hgroup {    
+    position: relative;
+    z-index: 3;
+    
     padding: 20px 0;
 
     width: 100%;
