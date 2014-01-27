@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="frontend/css/demo.css" />
         <link href='http://fonts.googleapis.com/css?family=Great+Vibes|Roboto:400,100,300,700,500|Roboto+Condensed:400,300|Roboto+Slab' rel='stylesheet' type='text/css'>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>CMS Demo Page &bull; <?= $data['title'] ?></title>
+        <title>CMS Demo Page</title>
     </head>
     <body>
         <header>
