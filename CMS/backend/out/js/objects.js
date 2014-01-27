@@ -116,7 +116,7 @@ var Layer = function ( o )
     
         var b = document.createElement ( 'button' );
             b.type = 'button';
-            b.innerText = t;
+            b.appendChild ( document.createTextNode ( t ) );
             
             if ( fa )
             {
@@ -140,7 +140,7 @@ var Layer = function ( o )
                     if ( fn.object.style.display !== 'none' && ( e.keyCode === 13 || e.keyCode === 27 ) )
                     {
                         
-                        fn.hide.apply ( fn )
+                        fn.hide.apply ( fn );
                                 
                         return false;
                         
