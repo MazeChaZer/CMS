@@ -26,7 +26,6 @@ class View
     
     public function setUserrights($userrights){
         $this->userrights = $userrights;
-        print_r($userrights);
     }
     
     public function out(){
