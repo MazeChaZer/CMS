@@ -19,12 +19,7 @@
         <section role="main">
             <div class="articles">
                 <div style="padding: 10px 10px 40px 10px">
-                <?php
-                    if(isset($data['category']) && isset($data['category']['categoryID']))
-                    {
-                        printf('<a href="category/%s">Alle Artikel der Kategorie "%s"</a>', $data['category']['categoryID'], $data['category']['bezeichnung']);
-                    }
-                ?>
+                    <a href="categories">Zeige alle Kategorien</a>
                 </div>
                 <div>
                 <h3>Neueste Artikel</h3>

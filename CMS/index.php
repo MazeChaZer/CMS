@@ -1,5 +1,4 @@
 <?php
-
 require_once('backend/core/init/settings.php');
 
 $db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
@@ -29,7 +28,19 @@ if(substr($_GET['request'], 0, 8) == "category") {
 	require_once 'frontend/templates/categories.php';
 	require_once 'frontend/templates/footer.php';
 
-} else {
+} 
+else if(substr($_GET['request'], 0, 10) == "categories") {
+	$st = $db->prepare(
+		"SELECT * FROM entries"
+	);
+	$st->execute();
+	$data['artikel'] = $st->fetchAll(PDO::FETCH_ASSOC);
+	require_once 'frontend/templates/head.php';
+	require_once 'frontend/templates/allcategories.php';
+	require_once 'frontend/templates/footer.php';
+
+}
+else {
 	$st = $db->prepare("SELECT * FROM entries WHERE URL=:URL;");
 	$st->execute(array(":URL" => $_GET['request']));
 	$result = $st->fetch(PDO::FETCH_ASSOC);
